@@ -173,7 +173,7 @@
                 <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-entegral-green"></div>
 
                 <p class="text-slate-200 text-center leading-relaxed mb-6 font-medium text-lg md:text-xl">
-                    2Chandler's inbox is swamped! You have <span class="font-black text-white uppercase border-b-2 border-entegral-green">3 minutes</span> to clear the queue. Keep the policyholders happy by matching their rental needs perfectly. Make sure you don't go above policy limits!
+                    Chandler's inbox is swamped! You have <span class="font-black text-white uppercase border-b-2 border-entegral-green">3 minutes</span> to clear the queue. Keep the policyholders happy by matching their rental needs perfectly. Make sure you don't go above policy limits!
                 </p>
 
                 <div class="border-t-2 border-dashed border-slate-600 my-5"></div>
@@ -386,43 +386,30 @@
                 <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-2">Your 3 minutes are up!</p>
             </div>
 
-            <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 mt-2 text-center shadow-inner">
-                <span class="text-xs font-bold text-slate-400 tracking-widest uppercase block">Performance Score</span>
-                <div class="text-4xl font-black text-entegral-navy mt-1 font-arcade" id="finalScoreText">
-                    0 PTS
+            <!-- Redesigned score performance metrics card -->
+            <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 mt-2 text-center shadow-inner flex flex-col gap-4">
+                <div>
+                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase block">Final Score</span>
+                    <div class="text-4xl font-black text-entegral-navy mt-1 font-arcade" id="finalScoreText">
+                        0 / 0
+                    </div>
+                </div>
+                
+                <div class="border-t-2 border-dashed border-slate-200 my-1"></div>
+                
+                <div>
+                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase block">Accuracy Rating</span>
+                    <div class="text-3xl font-black text-entegral-green mt-1 font-arcade" id="finalPercentageText">
+                        0%
+                    </div>
+                    <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mt-1.5 font-arcade" id="finalRatingText">
+                        ROOKIE DISPATCHER 🔰
+                    </div>
                 </div>
             </div>
 
-            <!-- 🏆 Inline High Score Submission Form (Initially Hidden) -->
-            <div id="highScoreInputZone" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-4 mt-2 text-center shadow-inner hidden">
-                <span class="text-xs font-bold text-entegral-green tracking-widest uppercase block animate-pulse">✨ NEW HIGH SCORE! ✨</span>
-                <input type="text" id="playerNameInput" maxlength="10" placeholder="ENTER YOUR NAME" class="w-full text-center text-lg font-black font-arcade border-2 border-slate-300 rounded-lg p-2 mt-2 focus:outline-none focus:border-entegral-green uppercase bg-white text-slate-800">
-                <button id="submitScoreBtn" class="w-full mt-3 bg-entegral-green text-entegral-navy font-black text-sm py-3 rounded-xl border-b-4 border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-wider cursor-pointer">
-                    SUBMIT SCORE ➔
-                </button>
-            </div>
-
-            <!-- 🏆 Arcade High Scoreboard -->
-            <div class="w-full bg-arcade-dark border-2 border-entegral-green/40 rounded-xl p-4 mb-2 text-left relative shadow-[0_0_15px_rgba(147,212,13,0.15)]">
-                <h3 class="text-entegral-green font-arcade text-xs uppercase text-center mb-3 tracking-wider font-bold">🏆 Shift High Scores</h3>
-                <ul class="text-sm space-y-2 font-arcade font-bold">
-                    <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5">
-                        <span class="flex items-center gap-2"><span class="text-entegral-green">1ST</span> ALEX</span>
-                        <span class="text-entegral-green">90 PTS</span>
-                    </li>
-                    <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5">
-                        <span class="flex items-center gap-2"><span class="text-enterprise-green">2ND</span> SARAH</span>
-                        <span class="text-enterprise-green">70 PTS</span>
-                    </li>
-                    <li class="flex justify-between items-center text-slate-200 font-arcade">
-                        <span class="text-slate-400 flex items-center gap-2"><span>3RD</span> CHANDLER</span>
-                        <span class="text-slate-400">40 PTS</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Simple play again button (Hidden if submitting high score) -->
-            <button id="restartBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest hidden">
+            <!-- Always visible Play Again button -->
+            <button id="restartBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest">
                 PLAY AGAIN ➔
             </button>
         </div>
@@ -710,6 +697,7 @@
     });
     // --- GAME STATE ---
     let score = 0;
+    let ticketsAttempted = 0;
     let timeLeft = 180; // 3 minutes for production
     let gameTimer = null;
     let activeScenario = null;
@@ -1004,6 +992,8 @@
     });
 
     function showFeedbackModal(ticketScore, detailsArray) {
+        ticketsAttempted++;
+
         const modal = document.getElementById('dispatchFeedbackModal');
         const card = document.getElementById('dispatchFeedbackCard');
         const stamp = document.getElementById('feedbackStamp');
@@ -1088,6 +1078,7 @@
     // --- GAME LOOP & TIMER ---
     function startGame() {
         score = 0;
+        ticketsAttempted = 0;
         timeLeft = 180; // 3 minutes for production
         activeScenario = null;
         document.getElementById('scoreText').innerText = score;
@@ -1130,11 +1121,25 @@
         const modal = document.getElementById('gameOverModal');
         const card = document.getElementById('gameOverCard');
         const loadingCard = document.getElementById('loadingCard');
-        const inputZone = document.getElementById('highScoreInputZone');
-        const restartBtn = document.getElementById('restartBtn');
 
-        // Set final score text
-        document.getElementById('finalScoreText').innerText = `${score} PTS`;
+        // Calculate maximum potential points (tickets attempted * 10)
+        const maxPoints = ticketsAttempted * 10;
+        document.getElementById('finalScoreText').innerText = `${score} / ${maxPoints}`;
+
+        // Calculate accuracy percentage
+        const percentage = maxPoints > 0 ? Math.round((score / maxPoints) * 100) : 0;
+        document.getElementById('finalPercentageText').innerText = `${percentage}%`;
+
+        // Determine Rating text
+        let ratingText = "ROOKIE DISPATCHER 🔰";
+        if (percentage >= 90) {
+            ratingText = "ELITE DISPATCHER 👑";
+        } else if (percentage >= 75) {
+            ratingText = "PRO DISPATCHER ⭐";
+        } else if (percentage >= 50) {
+            ratingText = "AMATEUR DISPATCHER 👍";
+        }
+        document.getElementById('finalRatingText').innerText = ratingText;
 
         // 1. INSTANTLY reveal the modal backdrop and loading card (No delay!)
         modal.style.opacity = '1';
@@ -1152,129 +1157,8 @@
             }, 50);
         };
 
-        // Fetch live scores first BEFORE opening the modal
-        if (typeof google !== 'undefined' && google.script && google.script.run) {
-            google.script.run.withSuccessHandler(function(scores) {
-                let qualifies = false;
-                if (!scores || scores.length < 3) {
-                    qualifies = true;
-                } else {
-                    qualifies = score > scores[2].score;
-                }
-
-                if (qualifies) {
-                    // Show input form inline, keep play again hidden
-                    inputZone.classList.remove('hidden');
-                    restartBtn.classList.add('hidden');
-                    document.getElementById('playerNameInput').value = "";
-                } else {
-                    // Just show default play again
-                    inputZone.classList.add('hidden');
-                    restartBtn.classList.remove('hidden');
-                }
-
-                // Render scores list
-                renderHighScoresUI(scores);
-
-                // Now reveal the complete modal seamlessly!
-                revealFinalResults();
-
-                // Focus input if shown
-                if (qualifies) {
-                    document.getElementById('playerNameInput').focus();
-                }
-            }).getTopScores();
-        } else {
-            // Mock test path (forced high score)
-            setTimeout(() => {
-                inputZone.classList.remove('hidden');
-                restartBtn.classList.add('hidden');
-                document.getElementById('playerNameInput').value = "";
-                renderHighScoresUI();
-                revealFinalResults();
-            }, 1200); // Tiny delay to show off the loader
-        }
-    }
-
-    // Handle inline Submit Score Click
-    document.getElementById('submitScoreBtn').addEventListener('click', () => {
-        playSound('click');
-        const nameInput = document.getElementById('playerNameInput');
-        const nameVal = nameInput.value.trim().toUpperCase();
-
-        if (!nameVal) {
-            alert("Please enter your name to claim your high score!");
-            return;
-        }
-
-        const inputZone = document.getElementById('highScoreInputZone');
-        const restartBtn = document.getElementById('restartBtn');
-
-        if (typeof google !== 'undefined' && google.script && google.script.run) {
-            // Disable button to prevent double-submit
-            document.getElementById('submitScoreBtn').disabled = true;
-            document.getElementById('submitScoreBtn').innerText = "SUBMITTING...";
-
-            google.script.run.withSuccessHandler(function() {
-                // Re-fetch, render scoreboard, hide input, show restart
-                google.script.run.withSuccessHandler(function(scores) {
-                    renderHighScoresUI(scores);
-                    inputZone.classList.add('hidden');
-                    restartBtn.classList.remove('hidden');
-
-                    // Reset button
-                    document.getElementById('submitScoreBtn').disabled = false;
-                    document.getElementById('submitScoreBtn').innerText = "SUBMIT SCORE ➔";
-                }).getTopScores();
-            }).saveScore(nameVal, score);
-        } else {
-            // Mock offline submission simulation
-            inputZone.classList.add('hidden');
-            restartBtn.classList.remove('hidden');
-
-            const mockList = [
-                { name: nameVal, score: score },
-                { name: "ALEX", score: 90 },
-                { name: "SARAH", score: 70 }
-            ];
-            renderHighScoresUI(mockList);
-        }
-    });
-
-    function renderHighScoresUI(scores) {
-        const listContainer = document.querySelector('#gameOverModal ul');
-        if (!listContainer) return;
-
-        let displayScores = scores || [];
-        // Padding with fake data if sheet has less than 3
-        const fallbackDefaults = [
-            { name: "ALEX", score: 90 },
-            { name: "SARAH", score: 70 },
-            { name: "CHANDLER", score: 40 }
-        ];
-
-        for (let i = 0; i < 3; i++) {
-            if (!displayScores[i]) {
-                displayScores.push(fallbackDefaults[i]);
-            }
-        }
-
-        displayScores = displayScores.slice(0, 3);
-
-        listContainer.innerHTML = `
-                <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5 font-arcade">
-                    <span class="flex items-center gap-2"><span class="text-entegral-green">1ST</span> ${displayScores[0].name}</span>
-                    <span class="text-entegral-green">${displayScores[0].score} PTS</span>
-                </li>
-                <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5 font-arcade">
-                    <span class="flex items-center gap-2"><span class="text-enterprise-green">2ND</span> ${displayScores[1].name}</span>
-                    <span class="text-enterprise-green">${displayScores[1].score} PTS</span>
-                </li>
-                <li class="flex justify-between items-center text-slate-200 font-arcade">
-                    <span class="text-slate-400 flex items-center gap-2"><span>3RD</span> ${displayScores[2].name}</span>
-                    <span class="text-slate-400">${displayScores[2].score} PTS</span>
-                </li>
-            `;
+        // Reveal final card after 1.2s delay for suspense!
+        setTimeout(revealFinalResults, 1200);
     }
 
     // Start Game Listener Update
