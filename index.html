@@ -71,11 +71,11 @@
             bottom: 0;
             right: 0;
             background: linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0),
-                rgba(255, 255, 255, 0) 50%,
-                rgba(0, 0, 0, 0.15) 50%,
-                rgba(0, 0, 0, 0.15)
+                    to bottom,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 255, 255, 0) 50%,
+                    rgba(0, 0, 0, 0.15) 50%,
+                    rgba(0, 0, 0, 0.15)
             );
             background-size: 100% 6px;
             pointer-events: none;
@@ -91,11 +91,11 @@
             bottom: 0;
             right: 0;
             background: linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0),
-                rgba(255, 255, 255, 0) 50%,
-                rgba(0, 0, 0, 0.02) 50%,
-                rgba(0, 0, 0, 0.02)
+                    to bottom,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 255, 255, 0) 50%,
+                    rgba(0, 0, 0, 0.02) 50%,
+                    rgba(0, 0, 0, 0.02)
             );
             background-size: 100% 6px;
             pointer-events: none;
@@ -121,358 +121,1216 @@
 </head>
 <body>
 
-    <!-- The Mobile App Shell -->
-    <div class="app-shell">
+<!-- The Mobile App Shell -->
+<div class="app-shell">
 
-        <!-- START SCREEN MODAL -->
-        <div id="startScreen" class="absolute inset-0 z-40 bg-entegral-navy scanlines-dark flex flex-col p-6 transition-opacity duration-300 h-full w-full overflow-y-auto">
+    <!-- START SCREEN MODAL -->
+    <div id="startScreen" class="absolute inset-0 z-40 bg-entegral-navy scanlines-dark flex flex-col p-6 transition-opacity duration-300 h-full w-full overflow-y-auto">
 
-            <div class="flex-1 flex flex-col items-center justify-evenly min-h-[600px] py-4">
+        <div class="flex-1 flex flex-col items-center justify-evenly min-h-[600px] py-4">
 
-                <!-- Flashing Arcade Header -->
-                <div class="flex flex-col items-center justify-center w-full">
-                    <div class="text-xl md:text-2xl text-entegral-green font-arcade tracking-[0.2em] mb-4 animate-pulse uppercase font-bold">
-                        Beat The High Score
-                    </div>
-
-                    <h1 class="text-7xl md:text-8xl font-black italic text-white tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">
-                        RENTAL<br>
-                        <span class="text-entegral-green">RUSH</span>
-                    </h1>
+            <!-- Flashing Arcade Header -->
+            <div class="flex flex-col items-center justify-center w-full">
+                <div class="text-xl md:text-2xl text-entegral-green font-arcade tracking-[0.2em] mb-4 animate-pulse uppercase font-bold">
+                    Beat The High Score
                 </div>
 
-                <!-- Pixelated Fast Car Animation -->
-                <div class="w-full flex justify-center my-3 relative z-10">
-                    <svg class="w-32 h-16" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: driveFast 1.2s infinite linear;">
-                        <!-- 8-bit Car Body -->
-                        <rect x="8" y="10" width="32" height="8" fill="#93d40d" />
-                        <rect x="12" y="4" width="20" height="6" fill="#93d40d" />
-                        <!-- Windows -->
-                        <rect x="14" y="6" width="6" height="4" fill="#071626" />
-                        <rect x="24" y="6" width="6" height="4" fill="#071626" />
-                        <!-- Wheels -->
-                        <rect x="12" y="16" width="6" height="6" fill="#013e71" />
-                        <rect x="30" y="16" width="6" height="6" fill="#013e71" />
-                        <!-- Speed Lines (Trails) -->
-                        <rect x="0" y="12" width="4" height="2" fill="#fff" opacity="0.8" />
-                        <rect x="2" y="16" width="6" height="2" fill="#fff" opacity="0.5" />
-                    </svg>
-                    <style>
-                        @keyframes driveFast {
-                            0% { transform: translateX(-100px) rotate(-2deg); }
-                            50% { transform: translateX(0px) rotate(1deg); }
-                            100% { transform: translateX(100px) rotate(-2deg); }
-                        }
-                    </style>
-                </div>
-
-                <!-- Instruction & Scoring Console -->
-                <div class="bg-arcade-dark/90 border-2 border-entegral-green/60 rounded-xl p-6 w-full shadow-[0_0_20px_rgba(147,212,13,0.2)] relative">
-                    <!-- Decorative corner blocks -->
-                    <div class="absolute -top-2 -left-2 w-4 h-4 bg-entegral-green"></div>
-                    <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-entegral-green"></div>
-
-                    <p class="text-slate-200 text-center leading-relaxed mb-6 font-medium text-lg md:text-xl">
-                        Chandler's inbox is swamped! You have <span class="font-black text-white uppercase border-b-2 border-entegral-green">3 minutes</span> to clear the queue. Keep the policyholders happy by matching their rental needs perfectly. Make sure you don't go above policy limits!
-                    </p>
-
-                    <div class="border-t-2 border-dashed border-slate-600 my-5"></div>
-
-                    <h2 class="text-entegral-green font-arcade uppercase text-center mb-4 tracking-widest font-bold text-xl md:text-2xl">Performance Review</h2>
-                    <ul class="space-y-5 font-arcade font-bold text-lg md:text-xl">
-                        <li class="flex justify-between items-center">
-                            <div class="flex flex-col">
-                                <span class="text-white flex items-center gap-3"><span class="w-6 h-6 bg-entegral-green inline-block border-2 border-black shadow-sm"></span> PERFECT </span>
-                                <span class="text-slate-400 mt-1 ml-9 font-sans tracking-normal italic text-sm">No notes 👌</span>
-                            </div>
-                            <span class="text-entegral-green tracking-widest">10 PTS</span>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <div class="flex flex-col">
-                                <span class="text-white flex items-center gap-3"><span class="w-6 h-6 bg-enterprise-green inline-block border-2 border-black shadow-sm"></span> PARTIAL</span>
-                                <span class="text-slate-400 mt-1 ml-9 font-sans tracking-normal italic text-sm">You tried your best...</span>
-                            </div>
-                            <span class="text-enterprise-green tracking-widest">2-8 PTS</span>
-                        </li>
-                        <li class="flex justify-between items-center">
-                            <div class="flex flex-col">
-                                <span class="text-white flex items-center gap-3"><span class="w-6 h-6 bg-red-500 inline-block border-2 border-black shadow-sm"></span> FAILED</span>
-                                <span class="text-slate-400 mt-1 ml-9 font-sans tracking-normal italic text-sm">You have a new customer complaint.</span>
-                            </div>
-                            <span class="text-red-500 tracking-widest">0 PTS</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Start Button -->
-                <div class="w-full relative z-50 pt-6 pb-2">
-                    <!-- We use a custom chunky button that depresses when clicked -->
-                    <button id="startGameBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-2xl md:text-3xl py-4 rounded-xl border-b-[6px] border-[#5a8703] hover:bg-[#a6ec15] hover:border-[#6a9e04] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-wider flex justify-center items-center gap-2">
-                        CLOCK IN <span class="text-3xl leading-none">➔</span>
-                    </button>
-                </div>
-
+                <h1 class="text-7xl md:text-8xl font-black italic text-white tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">
+                    RENTAL<br>
+                    <span class="text-entegral-green">RUSH</span>
+                </h1>
             </div>
-        </div>
 
-        <!-- MAIN GAME BOARD (Hidden initially) -->
-        <div id="gameBoard" class="absolute inset-0 z-30 bg-slate-100 scanlines-light flex flex-col opacity-0 pointer-events-none transition-opacity duration-300">
+            <!-- Pixelated Fast Car Animation -->
+            <div class="w-full flex justify-center my-3 relative z-10">
+                <svg class="w-32 h-16" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="animation: driveFast 1.2s infinite linear;">
+                    <!-- 8-bit Car Body -->
+                    <rect x="8" y="10" width="32" height="8" fill="#93d40d" />
+                    <rect x="12" y="4" width="20" height="6" fill="#93d40d" />
+                    <!-- Windows -->
+                    <rect x="14" y="6" width="6" height="4" fill="#071626" />
+                    <rect x="24" y="6" width="6" height="4" fill="#071626" />
+                    <!-- Wheels -->
+                    <rect x="12" y="16" width="6" height="6" fill="#013e71" />
+                    <rect x="30" y="16" width="6" height="6" fill="#013e71" />
+                    <!-- Speed Lines (Trails) -->
+                    <rect x="0" y="12" width="4" height="2" fill="#fff" opacity="0.8" />
+                    <rect x="2" y="16" width="6" height="2" fill="#fff" opacity="0.5" />
+                </svg>
+                <style>
+                    @keyframes driveFast {
+                        0% { transform: translateX(-100px) rotate(-2deg); }
+                        50% { transform: translateX(0px) rotate(1deg); }
+                        100% { transform: translateX(100px) rotate(-2deg); }
+                    }
+                </style>
+            </div>
 
-            <!-- STICKY HEADER -->
-            <header class="bg-entegral-navy border-b-4 border-entegral-green px-3 py-3 shrink-0 shadow-md relative z-20">
-                <div class="flex items-center justify-between mb-2">
-                    <h1 class="font-black italic text-xl text-white tracking-tighter leading-none text-arcade-shadow transform -skew-x-6">
-                        RENTAL <span class="text-entegral-green">RUSH</span>
-                    </h1>
+            <!-- Instruction & Scoring Console -->
+            <div class="bg-arcade-dark/90 border-2 border-entegral-green/60 rounded-xl p-6 w-full shadow-[0_0_20px_rgba(147,212,13,0.2)] relative">
+                <!-- Decorative corner blocks -->
+                <div class="absolute -top-2 -left-2 w-4 h-4 bg-entegral-green"></div>
+                <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-entegral-green"></div>
 
-                    <div class="flex items-center gap-2">
-                        <!-- Score Display -->
-                        <div class="bg-slate-900 border-2 border-slate-700 px-2 py-1 rounded-md flex items-center gap-1.5 shadow-inner">
-                            <span class="text-[10px] text-slate-400 font-bold font-arcade uppercase">SCORE</span>
-                            <span id="scoreText" class="text-sm font-black text-entegral-green font-arcade tracking-wider">0</span>
+                <p class="text-slate-200 text-center leading-relaxed mb-6 font-medium text-lg md:text-xl">
+                    Chandler's inbox is swamped! You have <span class="font-black text-white uppercase border-b-2 border-entegral-green">3 minutes</span> to clear the queue. Keep the policyholders happy by matching their rental needs perfectly. Make sure you don't go above policy limits!
+                </p>
+
+                <div class="border-t-2 border-dashed border-slate-600 my-5"></div>
+
+                <h2 class="text-entegral-green font-arcade uppercase text-center mb-4 tracking-widest font-bold text-xl md:text-2xl">Performance Review</h2>
+                <ul class="space-y-5 font-arcade font-bold text-lg md:text-xl">
+                    <li class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-white flex items-center gap-3"><span class="w-6 h-6 bg-entegral-green inline-block border-2 border-black shadow-sm"></span> PERFECT </span>
+                            <span class="text-slate-400 mt-1 ml-9 font-sans tracking-normal italic text-sm">No notes 👌</span>
                         </div>
-
-                        <!-- Timer Display -->
-                        <div class="bg-slate-900 border-2 border-red-900 px-2 py-1 rounded-md flex items-center gap-1.5 shadow-inner animate-pulse">
-                            <span class="text-[10px] text-slate-400 font-bold font-arcade uppercase">TIME</span>
-                            <span id="timerText" class="text-sm font-black text-red-500 font-arcade tracking-wider">03:00</span>
+                        <span class="text-entegral-green tracking-widest">10 PTS</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-white flex items-center gap-3"><span class="w-6 h-6 bg-enterprise-green inline-block border-2 border-black shadow-sm"></span> PARTIAL</span>
+                            <span class="text-slate-400 mt-1 ml-9 font-sans tracking-normal italic text-sm">You tried your best...</span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Inbox Recall Button (Full Width for easy tapping) -->
-                <button id="viewActivePromptBtn" class="w-full bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-lg py-2 mt-3 flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm relative z-20">
-                    <span class="text-lg leading-none">🔔</span>
-                    <span class="text-sm font-bold text-slate-700 uppercase tracking-wide">View Customer Request</span>
-                </button>
-            </header>
-
-            <!-- MAIN ACTIVE WORKSPACE (Configuration Grids) -->
-            <main class="flex-1 overflow-y-auto p-3 flex flex-col gap-3 pb-24 custom-scrollbar relative z-10">
-
-                <!-- 1. Start Date Selector -->
-                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
-                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">1. Start Date</label>
-                    <div class="grid grid-cols-3 gap-2" id="dateGrid">
-                        <button data-val="TODAY" class="date-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">TODAY</button>
-                        <button data-val="TOMORROW" class="date-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">TOMORROW</button>
-                        <button data-val="REPAIR_DATE" class="date-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">REPAIR<br>DATE</button>
-                    </div>
-                </div>
-
-                <!-- 2. Location Selector -->
-                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
-                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">2. Rental Branch Near</label>
-                    <div class="grid grid-cols-3 gap-2" id="locationGrid">
-                        <button data-val="Home" class="location-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">HOME</button>
-                        <button data-val="Repair Shop" class="location-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">SHOP</button>
-                        <button data-val="Work" class="location-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">WORK</button>
-                    </div>
-                </div>
-
-                <!-- 3. Vehicle Class Selector -->
-                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
-                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">3. Vehicle Class</label>
-                    <div class="grid grid-cols-3 gap-2" id="vehicleGrid">
-                        <button data-val="Economy" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">ECONOMY</button>
-                        <button data-val="Sedan" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">SEDAN</button>
-                        <button data-val="SUV" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">SUV</button>
-                        <button data-val="Pickup" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">PICKUP</button>
-                        <button data-val="Minivan" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">MINIVAN</button>
-                        <button data-val="Luxury" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">LUXURY</button>
-                    </div>
-                </div>
-
-                <!-- 4. Rental Length -->
-                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
-                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">4. Rental Length</label>
-                    <div class="flex items-center justify-center gap-4 mb-2">
-                        <button id="lengthMinusBtn" class="w-12 h-12 bg-slate-50 border-2 border-slate-300 rounded-lg text-2xl font-black text-slate-500 hover:bg-slate-200 active:bg-slate-300 transition-colors flex items-center justify-center cursor-pointer shadow-sm">-</button>
-                        <div class="w-24 text-center">
-                            <span id="rentalLengthDisplay" class="text-2xl font-black text-entegral-navy font-arcade">7</span>
-                            <span class="text-xs font-bold text-slate-400 block uppercase tracking-widest">Days</span>
+                        <span class="text-enterprise-green tracking-widest">2-8 PTS</span>
+                    </li>
+                    <li class="flex justify-between items-center">
+                        <div class="flex flex-col">
+                            <span class="text-white flex items-center gap-3"><span class="w-6 h-6 bg-red-500 inline-block border-2 border-black shadow-sm"></span> FAILED</span>
+                            <span class="text-slate-400 mt-1 ml-9 font-sans tracking-normal italic text-sm">You have a new customer complaint.</span>
                         </div>
-                        <button id="lengthPlusBtn" class="w-12 h-12 bg-slate-50 border-2 border-slate-300 rounded-lg text-2xl font-black text-slate-500 hover:bg-slate-200 active:bg-slate-300 transition-colors flex items-center justify-center cursor-pointer shadow-sm">+</button>
-                    </div>
-                    <div class="text-center mt-2">
-                        <span id="policyCoverageText" class="text-[10px] text-slate-400 font-bold uppercase tracking-wide">Based on policy, customer is covered for up to <span class="text-entegral-green">14 days</span>.</span>
-                    </div>
-                </div>
-
-                <!-- 5. Add-ons Toggles (Optional) -->
-                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
-                    <div class="flex items-center justify-between mb-3 border-b-2 border-slate-100 pb-2">
-                        <label class="text-sm font-black text-entegral-navy uppercase tracking-widest block font-arcade">5. Add-on Request</label>
-                        <span class="text-[10px] bg-slate-200 text-slate-500 font-bold px-2 py-0.5 rounded-md uppercase">Optional</span>
-                    </div>
-                    <div class="grid grid-cols-3 gap-2" id="addonGrid">
-                        <!-- Removed 'None' button to make it truly optional -->
-                        <button data-val="GPS" class="addon-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">GPS</button>
-                        <button data-val="Car Seat" class="addon-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">CAR<br>SEAT</button>
-                        <button data-val="Toll Pass" class="addon-option-btn bg-slate-50 border-2 border-slate-200 hover:bg-slate-100 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">TOLL<br>PASS</button>
-                    </div>
-                </div>
-
-                <!-- 6. Policy Limits (Informational Audit Line) -->
-                <div class="bg-slate-100 border border-slate-300 rounded-lg p-3 text-center shrink-0 mt-2 mb-4 mx-2">
-                    <div id="policyAuditLine" class="text-sm font-bold text-slate-500 font-arcade uppercase tracking-wider flex items-center justify-center gap-2">
-                        <span>✅</span> WITHIN POLICY LIMITS
-                    </div>
-                </div>
-
-            </main>
-
-            <!-- STICKY DISPATCH FOOTER -->
-            <footer class="absolute bottom-0 left-0 right-0 z-20 bg-white border-t-2 border-slate-200 p-4 shrink-0 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-                <button id="dispatchBtn" class="w-full bg-entegral-navy text-white font-extrabold text-xl py-4 rounded-xl border-b-[6px] border-[#012d52] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest flex items-center justify-center gap-3 cursor-pointer">
-                    🚘 DISPATCH RENTAL
-                </button>
-            </footer>
-
-        </div>
-
-        <!-- ACTIVE INBOX DIALOG / POP-UP (incoming order) -->
-        <div id="inboxModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-            <div class="bg-white border-4 border-entegral-green rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-5 relative shadow-2xl transform scale-95 transition-transform duration-300" id="inboxCard">
-                <!-- Decorative Corner notches -->
-                <div class="absolute -top-1.5 -left-1.5 w-4 h-4 bg-entegral-green"></div>
-                <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-entegral-green"></div>
-
-                <div class="absolute -top-4 bg-entegral-green text-entegral-navy font-arcade font-bold px-4 py-1 rounded-full border-2 border-white shadow-md text-xs tracking-wider uppercase flex items-center gap-2">
-                    <span class="animate-pulse">🔔</span> NEW MESSAGE
-                </div>
-
-                <div class="mt-4 flex flex-col items-center">
-                    <div id="promptInitials" class="w-16 h-16 rounded-full bg-entegral-navy text-white flex items-center justify-center text-3xl font-black border-4 border-slate-100 shadow-md mb-2">H</div>
-                    <h2 id="promptName" class="text-2xl font-black text-slate-800 leading-tight">Holly S.</h2>
-                    <p id="promptCarType" class="text-xs text-slate-500 font-bold uppercase tracking-wide mt-1">Drives: Explorer (SUV)</p>
-                </div>
-
-                <div class="w-full bg-slate-50 border-2 border-slate-200 p-5 rounded-xl text-left shadow-inner relative">
-                    <p id="promptMainText" class="text-lg font-medium text-slate-700 leading-snug relative z-10 px-2 py-2 italic text-center">
-                        Hi! I'm Holly. My car was towed and isn't drivable. I need an SUV from home starting today, and I need a car seat!
-                    </p>
-                </div>
-
-                <button id="closeInboxBtn" class="w-full mt-2 bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest">
-                    GOT IT! ➔
-                </button>
-            </div>
-        </div>
-
-        <!-- GAME OVER / SHIFT ENDED MODAL -->
-        <div id="gameOverModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
-            
-            <!-- STAGE 1: Visual Loading Overlay -->
-            <div id="loadingCard" class="flex flex-col items-center gap-4 transition-all duration-300">
-                <div class="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center text-5xl shadow-lg border-2 border-red-400">
-                    <span class="animate-alarm-buzz">⏰</span>
-                </div>
-                <h2 class="text-4xl font-black italic text-red-600 tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">SHIFT OVER!</h2>
-                <p class="text-xs text-slate-300 font-arcade font-bold uppercase tracking-[0.2em] mt-2 animate-pulse text-center">Calculating Performance...</p>
+                        <span class="text-red-500 tracking-widest">0 PTS</span>
+                    </li>
+                </ul>
             </div>
 
-            <!-- STAGE 2: Game Over Score Card (Initially Hidden) -->
-            <div class="bg-white border-4 border-red-500 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-5 relative shadow-2xl transform scale-95 transition-all duration-300 hidden" id="gameOverCard">
-                <!-- Decorative Corner notches -->
-                <div class="absolute -top-1.5 -left-1.5 w-4 h-4 bg-red-500"></div>
-                <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-red-500"></div>
-
-                <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-3xl">
-                    <span class="animate-alarm-buzz">⏰</span>
-                </div>
-
-                <div>
-                    <h2 class="text-4xl font-black italic text-red-600 tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">SHIFT OVER!</h2>
-                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-2">Your 3 minutes are up!</p>
-                </div>
-
-                <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 mt-2 text-center shadow-inner">
-                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase block">Performance Score</span>
-                    <div class="text-4xl font-black text-entegral-navy mt-1 font-arcade" id="finalScoreText">
-                        0 PTS
-                    </div>
-                </div>
-
-                <!-- 🏆 Inline High Score Submission Form (Initially Hidden) -->
-                <div id="highScoreInputZone" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-4 mt-2 text-center shadow-inner hidden">
-                    <span class="text-xs font-bold text-entegral-green tracking-widest uppercase block animate-pulse">✨ NEW HIGH SCORE! ✨</span>
-                    <input type="text" id="playerNameInput" maxlength="10" placeholder="ENTER YOUR NAME" class="w-full text-center text-lg font-black font-arcade border-2 border-slate-300 rounded-lg p-2 mt-2 focus:outline-none focus:border-entegral-green uppercase bg-white text-slate-800">
-                    <button id="submitScoreBtn" class="w-full mt-3 bg-entegral-green text-entegral-navy font-black text-sm py-3 rounded-xl border-b-4 border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-wider cursor-pointer">
-                        SUBMIT SCORE ➔
-                    </button>
-                </div>
-
-                <!-- 🏆 Arcade High Scoreboard -->
-                <div class="w-full bg-arcade-dark border-2 border-entegral-green/40 rounded-xl p-4 mb-2 text-left relative shadow-[0_0_15px_rgba(147,212,13,0.15)]">
-                    <h3 class="text-entegral-green font-arcade text-xs uppercase text-center mb-3 tracking-wider font-bold">🏆 Shift High Scores</h3>
-                    <ul class="text-sm space-y-2 font-arcade font-bold">
-                        <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5">
-                            <span class="flex items-center gap-2"><span class="text-entegral-green">1ST</span> ALEX</span>
-                            <span class="text-entegral-green">90 PTS</span>
-                        </li>
-                        <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5">
-                            <span class="flex items-center gap-2"><span class="text-enterprise-green">2ND</span> SARAH</span>
-                            <span class="text-enterprise-green">70 PTS</span>
-                        </li>
-                        <li class="flex justify-between items-center text-slate-200 font-arcade">
-                            <span class="text-slate-400 flex items-center gap-2"><span>3RD</span> CHANDLER</span>
-                            <span class="text-slate-400">40 PTS</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Simple play again button (Hidden if submitting high score) -->
-                <button id="restartBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest hidden">
-                    PLAY AGAIN ➔
+            <!-- Start Button -->
+            <div class="w-full relative z-50 pt-6 pb-2">
+                <!-- We use a custom chunky button that depresses when clicked -->
+                <button id="startGameBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-2xl md:text-3xl py-4 rounded-xl border-b-[6px] border-[#5a8703] hover:bg-[#a6ec15] hover:border-[#6a9e04] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-wider flex justify-center items-center gap-2">
+                    CLOCK IN <span class="text-3xl leading-none">➔</span>
                 </button>
             </div>
+
         </div>
+    </div>
+
+    <!-- MAIN GAME BOARD (Hidden initially) -->
+    <div id="gameBoard" class="absolute inset-0 z-30 bg-slate-100 scanlines-light flex flex-col opacity-0 pointer-events-none transition-opacity duration-300">
+
+        <!-- STICKY HEADER -->
+        <header class="bg-entegral-navy border-b-4 border-entegral-green px-3 py-3 shrink-0 shadow-md relative z-20">
+            <div class="flex items-center justify-between mb-2">
+                <h1 class="font-black italic text-xl text-white tracking-tighter leading-none text-arcade-shadow transform -skew-x-6">
+                    RENTAL <span class="text-entegral-green">RUSH</span>
+                </h1>
+
+                <div class="flex items-center gap-2">
+                    <!-- Score Display -->
+                    <div class="bg-slate-900 border-2 border-slate-700 px-2 py-1 rounded-md flex items-center gap-1.5 shadow-inner">
+                        <span class="text-[10px] text-slate-400 font-bold font-arcade uppercase">SCORE</span>
+                        <span id="scoreText" class="text-sm font-black text-entegral-green font-arcade tracking-wider">0</span>
+                    </div>
+
+                    <!-- Timer Display -->
+                    <div class="bg-slate-900 border-2 border-red-900 px-2 py-1 rounded-md flex items-center gap-1.5 shadow-inner animate-pulse">
+                        <span class="text-[10px] text-slate-400 font-bold font-arcade uppercase">TIME</span>
+                        <span id="timerText" class="text-sm font-black text-red-500 font-arcade tracking-wider">03:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inbox Recall Button (Full Width for easy tapping) -->
+            <button id="viewActivePromptBtn" class="w-full bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 rounded-lg py-2 mt-3 flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm relative z-20">
+                <span class="text-lg leading-none">🔔</span>
+                <span class="text-sm font-bold text-slate-700 uppercase tracking-wide">View Customer Request</span>
+            </button>
+        </header>
+
+        <!-- MAIN ACTIVE WORKSPACE (Configuration Grids) -->
+        <main class="flex-1 overflow-y-auto p-3 flex flex-col gap-3 pb-24 custom-scrollbar relative z-10">
+
+            <!-- 1. Start Date Selector -->
+            <div id="dateSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">1. Start Date</label>
+                <div class="grid grid-cols-2 gap-2" id="dateGrid">
+                    <button data-val="TODAY" class="date-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">TODAY</button>
+                    <button data-val="REPAIR_DATE" class="date-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">REPAIR<br>DATE</button>
+                </div>
+            </div>
+
+            <!-- 2. Location Selector -->
+            <div id="locationSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">2. Rental Branch Near</label>
+                <div class="grid grid-cols-3 gap-2" id="locationGrid">
+                    <button data-val="Home" class="location-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">HOME</button>
+                    <button data-val="Repair Shop" class="location-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">SHOP</button>
+                    <button data-val="Work" class="location-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">WORK</button>
+                </div>
+            </div>
+
+            <!-- 3. Vehicle Class Selector -->
+            <div id="vehicleSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">3. Vehicle Class</label>
+                <div class="grid grid-cols-3 gap-2" id="vehicleGrid">
+                    <button data-val="Economy" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">ECONOMY</button>
+                    <button data-val="Sedan" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">SEDAN</button>
+                    <button data-val="SUV" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">SUV</button>
+                    <button data-val="Pickup" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">PICKUP</button>
+                    <button data-val="Minivan" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">MINIVAN</button>
+                    <button data-val="Luxury" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">LUXURY</button>
+                </div>
+            </div>
+
+            <!-- 4. Rental Length -->
+            <div id="lengthSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">4. Rental Length</label>
+                <div class="flex items-center justify-center gap-4 mb-2">
+                    <button id="lengthMinusBtn" class="w-12 h-12 bg-slate-50 border-2 border-slate-300 rounded-lg text-2xl font-black text-slate-500 hover:bg-slate-200 active:bg-slate-300 transition-colors flex items-center justify-center cursor-pointer shadow-sm">-</button>
+                    <div class="w-24 text-center">
+                        <span id="rentalLengthDisplay" class="text-2xl font-black text-entegral-navy font-arcade">7</span>
+                        <span class="text-xs font-bold text-slate-400 block uppercase tracking-widest">Days</span>
+                    </div>
+                    <button id="lengthPlusBtn" class="w-12 h-12 bg-slate-50 border-2 border-slate-300 rounded-lg text-2xl font-black text-slate-500 hover:bg-slate-200 active:bg-slate-300 transition-colors flex items-center justify-center cursor-pointer shadow-sm">+</button>
+                </div>
+                <div class="text-center mt-2">
+                    <span id="policyCoverageText" class="text-[10px] text-slate-400 font-bold uppercase tracking-wide">Based on policy, customer is covered for up to <span class="text-entegral-green">14 days</span>.</span>
+                </div>
+            </div>
+
+            <!-- 5. Add-ons Toggles (Optional) -->
+            <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
+                <div class="flex items-center justify-between mb-3 border-b-2 border-slate-100 pb-2">
+                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest block font-arcade">5. Add-on Request</label>
+                    <span class="text-[10px] bg-slate-200 text-slate-500 font-bold px-2 py-0.5 rounded-md uppercase">Optional</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2" id="addonGrid">
+                    <!-- Removed 'None' button to make it truly optional -->
+                    <button data-val="GPS" class="addon-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">GPS</button>
+                    <button data-val="Car Seat" class="addon-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">CAR<br>SEAT</button>
+                    <button data-val="Toll Pass" class="addon-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">TOLL<br>PASS</button>
+                </div>
+            </div>
+
+            <!-- 6. Policy Limits (Informational Audit Line) -->
+            <div class="bg-slate-100 border border-slate-300 rounded-lg p-3 text-center shrink-0 mt-2 mb-4 mx-2">
+                <div id="policyAuditLine" class="text-sm font-bold text-slate-500 font-arcade uppercase tracking-wider flex items-center justify-center gap-2">
+                    <span>✅</span> WITHIN POLICY LIMITS
+                </div>
+            </div>
+
+        </main>
+
+        <!-- STICKY DISPATCH FOOTER -->
+        <footer class="absolute bottom-0 left-0 right-0 z-20 bg-white border-t-2 border-slate-200 p-4 shrink-0 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+            <button id="dispatchBtn" class="w-full bg-entegral-navy text-white font-extrabold text-xl py-4 rounded-xl border-b-[6px] border-[#012d52] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest flex items-center justify-center gap-3 cursor-pointer">
+                🚘 DISPATCH RENTAL
+            </button>
+        </footer>
 
     </div>
 
-    <script>
-        // Simple script to handle the Start Button click transition
-        document.getElementById('startGameBtn').addEventListener('click', () => {
-            const startScreen = document.getElementById('startScreen');
-            const gameBoard = document.getElementById('gameBoard');
-            const inboxModal = document.getElementById('inboxModal');
+    <!-- ACTIVE INBOX DIALOG / POP-UP (incoming order) -->
+    <div id="inboxModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white border-4 border-entegral-green rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-5 relative shadow-2xl transform scale-95 transition-transform duration-300" id="inboxCard">
+            <!-- Decorative Corner notches -->
+            <div class="absolute -top-1.5 -left-1.5 w-4 h-4 bg-entegral-green"></div>
+            <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-entegral-green"></div>
 
-            // Fade out start screen
-            startScreen.style.opacity = '0';
-            startScreen.style.pointerEvents = 'none';
+            <div class="absolute -top-4 bg-entegral-green text-entegral-navy font-arcade font-bold px-4 py-1 rounded-full border-2 border-white shadow-md text-xs tracking-wider uppercase flex items-center gap-2">
+                <span class="animate-pulse">🔔</span> NEW MESSAGE
+            </div>
 
-            // Fade in game board
-            gameBoard.style.opacity = '1';
-            gameBoard.style.pointerEvents = 'auto';
+            <div class="mt-4 flex flex-col items-center">
+                <div id="promptInitials" class="w-16 h-16 rounded-full bg-entegral-navy text-white flex items-center justify-center text-3xl font-black border-4 border-slate-100 shadow-md mb-2">H</div>
+                <h2 id="promptName" class="text-2xl font-black text-slate-800 leading-tight">Holly</h2>
+                <p id="promptCarType" class="text-xs text-slate-500 font-bold uppercase tracking-wide mt-1">Drives: Explorer (SUV)</p>
+            </div>
 
-            // Immediately show the first inbox message
-            setTimeout(() => {
-                inboxModal.style.opacity = '1';
-                inboxModal.style.pointerEvents = 'auto';
-                document.getElementById('inboxCard').style.transform = 'scale(1)';
-            }, 300);
+            <div class="w-full bg-slate-50 border-2 border-slate-200 p-5 rounded-xl text-left shadow-inner relative">
+                <p id="promptMainText" class="text-lg font-medium text-slate-700 leading-snug relative z-10 px-2 py-2 italic text-center">
+                    Hi! I'm Holly. My car was towed and isn't drivable. I need an SUV from home starting today, and I need a car seat!
+                </p>
+            </div>
 
-            console.log("Game Shift Started!");
+            <button id="closeInboxBtn" class="w-full mt-2 bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest">
+                GOT IT! ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- GAME OVER / SHIFT ENDED MODAL -->
+    <div id="gameOverModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+
+        <!-- STAGE 1: Visual Loading Overlay -->
+        <div id="loadingCard" class="flex flex-col items-center gap-4 transition-all duration-300">
+            <div class="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center text-5xl shadow-lg border-2 border-red-400">
+                <span class="animate-alarm-buzz">⏰</span>
+            </div>
+            <h2 class="text-4xl font-black italic text-red-600 tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">SHIFT OVER!</h2>
+            <p class="text-xs text-slate-300 font-arcade font-bold uppercase tracking-[0.2em] mt-2 animate-pulse text-center">Calculating Performance...</p>
+        </div>
+
+        <!-- STAGE 2: Game Over Score Card (Initially Hidden) -->
+        <div class="bg-white border-4 border-red-500 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-5 relative shadow-2xl transform scale-95 transition-all duration-300 hidden" id="gameOverCard">
+            <!-- Decorative Corner notches -->
+            <div class="absolute -top-1.5 -left-1.5 w-4 h-4 bg-red-500"></div>
+            <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-red-500"></div>
+
+            <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-3xl">
+                <span class="animate-alarm-buzz">⏰</span>
+            </div>
+
+            <div>
+                <h2 class="text-4xl font-black italic text-red-600 tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">SHIFT OVER!</h2>
+                <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-2">Your 3 minutes are up!</p>
+            </div>
+
+            <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 mt-2 text-center shadow-inner">
+                <span class="text-xs font-bold text-slate-400 tracking-widest uppercase block">Performance Score</span>
+                <div class="text-4xl font-black text-entegral-navy mt-1 font-arcade" id="finalScoreText">
+                    0 PTS
+                </div>
+            </div>
+
+            <!-- 🏆 Inline High Score Submission Form (Initially Hidden) -->
+            <div id="highScoreInputZone" class="w-full bg-slate-50 border-2 border-slate-300 rounded-xl p-4 mt-2 text-center shadow-inner hidden">
+                <span class="text-xs font-bold text-entegral-green tracking-widest uppercase block animate-pulse">✨ NEW HIGH SCORE! ✨</span>
+                <input type="text" id="playerNameInput" maxlength="10" placeholder="ENTER YOUR NAME" class="w-full text-center text-lg font-black font-arcade border-2 border-slate-300 rounded-lg p-2 mt-2 focus:outline-none focus:border-entegral-green uppercase bg-white text-slate-800">
+                <button id="submitScoreBtn" class="w-full mt-3 bg-entegral-green text-entegral-navy font-black text-sm py-3 rounded-xl border-b-4 border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-wider cursor-pointer">
+                    SUBMIT SCORE ➔
+                </button>
+            </div>
+
+            <!-- 🏆 Arcade High Scoreboard -->
+            <div class="w-full bg-arcade-dark border-2 border-entegral-green/40 rounded-xl p-4 mb-2 text-left relative shadow-[0_0_15px_rgba(147,212,13,0.15)]">
+                <h3 class="text-entegral-green font-arcade text-xs uppercase text-center mb-3 tracking-wider font-bold">🏆 Shift High Scores</h3>
+                <ul class="text-sm space-y-2 font-arcade font-bold">
+                    <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5">
+                        <span class="flex items-center gap-2"><span class="text-entegral-green">1ST</span> ALEX</span>
+                        <span class="text-entegral-green">90 PTS</span>
+                    </li>
+                    <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5">
+                        <span class="flex items-center gap-2"><span class="text-enterprise-green">2ND</span> SARAH</span>
+                        <span class="text-enterprise-green">70 PTS</span>
+                    </li>
+                    <li class="flex justify-between items-center text-slate-200 font-arcade">
+                        <span class="text-slate-400 flex items-center gap-2"><span>3RD</span> CHANDLER</span>
+                        <span class="text-slate-400">40 PTS</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Simple play again button (Hidden if submitting high score) -->
+            <button id="restartBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest hidden">
+                PLAY AGAIN ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- DISPATCH FEEDBACK MODAL (Mid-game scoring) -->
+    <div id="dispatchFeedbackModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200">
+        <div id="dispatchFeedbackCard" class="bg-white border-4 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200">
+            <div id="feedbackStamp" class="text-4xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase">
+                PERFECT!
+            </div>
+
+            <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-3 text-center shadow-inner">
+                <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase block">Ticket Score</span>
+                <div id="feedbackScoreText" class="text-3xl font-black mt-1 font-arcade">
+                    10 / 10
+                </div>
+            </div>
+
+            <div id="feedbackDetails" class="text-xs font-bold text-slate-500 uppercase tracking-wide h-12 flex flex-col justify-center gap-1">
+                <!-- Dynamic deduction details injected here -->
+            </div>
+
+            <button id="nextCustomerBtn" class="w-full bg-entegral-navy text-white hover:bg-slate-800 font-black text-lg py-4 rounded-xl border-b-[6px] border-slate-900 active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest mt-2 cursor-pointer shadow-md">
+                NEXT CUSTOMER ➔
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // =====================================================================================
+    // RENTAL RUSH: 30 PROGRESSIVE GAME SCENARIOS
+    // =====================================================================================
+    const SCENARIOS = [
+        // SECTION 1: EASY SHIFTS (Levels 1-10) — Gold Policy ($1,500 Max)
+        {
+            name: "Holly",
+            carInfo: "Drives: SUV",
+            policyMax: 1500,
+            story: "My repair appointment is tomorrow morning. Please book me an Economy car at whatever branch is closest to the repair shop. I need it for 5 days, no add-ons.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Economy", addon: "None", length: 5 }
+        },
+        {
+            name: "John",
+            carInfo: "Drives: SUV",
+            policyMax: 1500,
+            story: "My car won't start today. There's an Enterprise right down the street from me. I need an SUV for 3 days, and please make sure it has GPS!",
+            expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "GPS", length: 3 }
+        },
+        {
+            name: "Elena",
+            carInfo: "Drives: Sedan",
+            policyMax: 1500,
+            story: "I just dropped my car off at the shop. I need a Sedan at whatever branch is closest to the mechanic asap. I'll need it for 7 days.",
+            expected: { date: "TODAY", location: "Repair Shop", clazz: "Sedan", addon: "None", length: 7 }
+        },
+        {
+            name: "Marcus",
+            carInfo: "Drives: Pickup",
+            policyMax: 1500,
+            story: "Dropping my truck off for repairs next Monday. I would prefer to pick up a rental Pickup closer to my workplace starting then. 4 days.",
+            expected: { date: "REPAIR_DATE", location: "Work", clazz: "Pickup", addon: "None", length: 4 }
+        },
+        {
+            name: "Sophia",
+            carInfo: "Drives: Minivan",
+            policyMax: 1500,
+            story: "Dropping my van off tomorrow. Please book a Minivan at whatever branch is closest to the repair shop starting then. Need it for 10 days, with a car seat.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Minivan", addon: "Car Seat", length: 10 }
+        },
+        {
+            name: "Tariq",
+            carInfo: "Drives: Sedan",
+            policyMax: 1500,
+            story: "I have an appointment to get my car repaired next Friday. It is fine to drive until then, so please book a Sedan at an Enterprise nearest the shop. I need it for 6 days and a Toll Pass.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Sedan", addon: "Toll Pass", length: 6 }
+        },
+        {
+            name: "Chloe",
+            carInfo: "Drives: Economy",
+            policyMax: 1500,
+            story: "Car was towed, I'm stranded at home! There's an Enterprise right down the street from me, I need an Economy car asap. 4 days, with GPS.",
+            expected: { date: "TODAY", location: "Home", clazz: "Economy", addon: "GPS", length: 4 }
+        },
+        {
+            name: "Brandon",
+            carInfo: "Drives: SUV",
+            policyMax: 1500,
+            story: "Wrecked my car today. Need an SUV at whatever branch is closest to me starting now. 5 days, with a car seat.",
+            expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "Car Seat", length: 5 }
+        },
+        {
+            name: "Devon",
+            carInfo: "Drives: Pickup",
+            policyMax: 1500,
+            story: "Dropped my truck at the shop today. Need a Pickup at whatever branch is closest to the shop starting today. 3 days, add a Toll Pass.",
+            expected: { date: "TODAY", location: "Repair Shop", clazz: "Pickup", addon: "Toll Pass", length: 3 }
+        },
+        {
+            name: "Emily",
+            carInfo: "Drives: Luxury",
+            policyMax: 1500,
+            story: "Repair starts tomorrow. I would prefer to pick up a Luxury car closer to my office after dropping it off. I need it for 5 days.",
+            expected: { date: "REPAIR_DATE", location: "Work", clazz: "Luxury", addon: "None", length: 5 }
+        },
+
+        // SECTION 2: MEDIUM SHIFTS (Levels 11-20)
+        {
+            name: "Elena",
+            carInfo: "Drives: Sedan",
+            policyMax: 1000,
+            story: "Repair is scheduled for next Monday. I'll need a Sedan for 15 days when I drop it off.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Sedan", addon: "None", length: 15 }
+        },
+        {
+            name: "Devon",
+            carInfo: "Drives: SUV",
+            policyMax: 1200,
+            story: "Stranded at home with no ride. Need an SUV for 18 days.",
+            expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "None", length: 18 }
+        },
+        {
+            name: "Sophia",
+            carInfo: "Drives: Minivan",
+            policyMax: 400,
+            story: "Dropping my van off tomorrow morning. Need a Minivan starting then. They said 5 days to fix. Will have my baby with me.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Minivan", addon: "Car Seat", length: 5 }
+        },
+        {
+            name: "Tariq",
+            carInfo: "Drives: Sedan",
+            policyMax: 1000,
+            story: "Repair scheduled next Tuesday, but fine to drive until then. I need a Sedan for 20 days. I'll get a ride to go pick it up after my shift so I can drive home.",
+            expected: { date: "REPAIR_DATE", location: "Work", clazz: "Sedan", addon: "None", length: 20 }
+        },
+        {
+            name: "Chloe",
+            carInfo: "Drives: Economy",
+            policyMax: 400,
+            story: "My car isn't drivable and I need to get to work. Need an Economy car for 12 days. Please add GPS!",
+            expected: { date: "TODAY", location: "Home", clazz: "Economy", addon: "GPS", length: 12 }
+        },
+        {
+            name: "Marcus",
+            carInfo: "Drives: Pickup",
+            policyMax: 1000,
+            story: "Dropping my truck off next Monday. Need a Pickup for 12 days. I want to swap keys right at the shop.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Pickup", addon: "None", length: 12 }
+        },
+        {
+            name: "Emily",
+            carInfo: "Drives: Sedan",
+            policyMax: 1000,
+            story: "Repairs scheduled next Wednesday and will take a couple weeks. I would like to pick up a Sedan before work. I use the express tollways.",
+            expected: { date: "REPAIR_DATE", location: "Work", clazz: "Sedan", addon: "Toll Pass", length: 14 }
+        },
+        {
+            name: "Brandon",
+            carInfo: "Drives: SUV",
+            policyMax: 1200,
+            story: "I was in a bad wreck, car just got towed. I got a ride home but I need a rental. SUV please, at least 15 days.",
+            expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "None", length: 15 }
+        },
+        {
+            name: "Sally",
+            carInfo: "Drives: Economy",
+            policyMax: 400,
+            story: "Dropping my car off tomorrow morning. Need an Economy car for 10 days that I can swap into. Please add GPS.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Economy", addon: "GPS", length: 10 }
+        },
+        {
+            name: "John",
+            carInfo: "Drives: Sedan",
+            policyMax: 1000,
+            story: "Dropping my car off tomorrow. Need to get a rental Sedan after that, for at least 16 days. My commute does use toll bridges.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Sedan", addon: "Toll Pass", length: 16 }
+        },
+
+        // SECTION 3: HARD SHIFTS (Levels 21-30)
+        {
+            name: "Mary",
+            carInfo: "Drives: SUV",
+            policyMax: 1000,
+            story: "SUV just got towed. I got a ride home but they said repairs will take 20 days. My car seat got towed with the car.",
+            expected: { date: "TODAY", location: "Home", clazz: "Sedan", addon: "Car Seat", length: 20 }
+        },
+        {
+            name: "Alex",
+            carInfo: "Drives: Luxury",
+            policyMax: 1200,
+            story: "Dropping my car off for repairs tomorrow. I'll need a Luxury car for 18 days. I'll take a cab to pick it up after work.",
+            expected: { date: "REPAIR_DATE", location: "Work", clazz: "SUV", addon: "None", length: 18 }
+        },
+        {
+            name: "Sarah",
+            carInfo: "Drives: Minivan",
+            policyMax: 900,
+            story: "My car is fine to drive until my repair next Tuesday. Will need a Minivan for 16 days. Want to swap keys at the repair center. Baby in tow.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "SUV", addon: "Car Seat", length: 16 }
+        },
+        {
+            name: "David",
+            carInfo: "Drives: Pickup",
+            policyMax: 800,
+            story: "Got into an accident and my truck isn't drivable. I need a Pickup for 15 days. There's an Enterprise a couple blocks away from my office.",
+            expected: { date: "TODAY", location: "Work", clazz: "Sedan", addon: "None", length: 15 }
+        },
+        {
+            name: "Lisa",
+            carInfo: "Drives: Sedan",
+            policyMax: 250,
+            story: "Got into a wreck and my car won't start. I'm home now but need a rental for 7 days. Please add GPS.",
+            expected: { date: "TODAY", location: "Home", clazz: "Economy", addon: "GPS", length: 7 }
+        },
+        {
+            name: "James",
+            carInfo: "Drives: SUV",
+            policyMax: 1000,
+            story: "Got in a bad wreck and my car got towed. They said 12 days to fix. I need to get to work tomorrow, need a rental asap. Need one with toll pass.",
+            expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "Toll Pass", length: 12 }
+        },
+        {
+            name: "Karen",
+            carInfo: "Drives: Minivan",
+            policyMax: 1000,
+            story: "Repair appointment is next week. Want to swap cars when I drop mine off. They said it would take 14 days to fix. Will have my toddler with me.",
+            expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Minivan", addon: "Car Seat", length: 14 }
+        },
+        {
+            name: "Robert",
+            carInfo: "Drives: Luxury",
+            policyMax: 1500,
+            story: "Car was just towed. Need a rental for the next 10 days. Would like to grab it on my way in to the office. Will need to use express lanes.",
+            expected: { date: "TODAY", location: "Home", clazz: "Luxury", addon: "Toll Pass", length: 10 }
+        },
+        {
+            name: "Linda",
+            carInfo: "Drives: Sedan",
+            policyMax: 400,
+            story: "Dropping my car off at the shop next Thursday. The shop is near my office. They said 9 days to fix.",
+            expected: { date: "REPAIR_DATE", location: "Work", clazz: "Sedan", addon: "None", length: 9 }
+        },
+        {
+            name: "William",
+            carInfo: "Drives: Pickup",
+            policyMax: 1000,
+            story: "Car is definitely a total loss, it just got towed. I'm stuck at home now. I need a rental for 11 days. Toddler is with me.",
+            expected: { date: "TODAY", location: "Home", clazz: "Pickup", addon: "Car Seat", length: 11 }
+        }
+    ];
+
+    // Simple script to handle the Start Button click transition
+    document.getElementById('startGameBtn').addEventListener('click', () => {
+        const startScreen = document.getElementById('startScreen');
+        const gameBoard = document.getElementById('gameBoard');
+
+        // Fade out start screen
+        startScreen.style.opacity = '0';
+        startScreen.style.pointerEvents = 'none';
+
+        // Fade in game board
+        gameBoard.style.opacity = '1';
+        gameBoard.style.pointerEvents = 'auto';
+
+        startGame(); // Kicks off timer and first customer load
+        console.log("Game Shift Started!");
+    });
+
+    // Open Inbox
+    document.getElementById('viewActivePromptBtn').addEventListener('click', () => {
+        const inboxModal = document.getElementById('inboxModal');
+        inboxModal.style.opacity = '1';
+        inboxModal.style.pointerEvents = 'auto';
+        document.getElementById('inboxCard').style.transform = 'scale(1)';
+    });
+
+    // Close Inbox
+    document.getElementById('closeInboxBtn').addEventListener('click', () => {
+        const inboxModal = document.getElementById('inboxModal');
+        inboxModal.style.opacity = '0';
+        inboxModal.style.pointerEvents = 'none';
+        document.getElementById('inboxCard').style.transform = 'scale(0.95)';
+    });
+    // --- GAME STATE ---
+    let score = 0;
+    let timeLeft = 180; // 3 minutes for production
+    let gameTimer = null;
+    let activeScenario = null;
+    let selectedDate = null;
+    let selectedLocation = null;
+    let selectedVehicle = null;
+    let selectedAddon = null;
+
+    const VEHICLE_RATES = {
+        "Economy": 30,
+        "Sedan": 40,
+        "SUV": 55,
+        "Pickup": 60,
+        "Minivan": 60,
+        "Luxury": 80
+    };
+
+    // --- SCENARIO LOADING ENGINE ---
+    let availableEasy = [];
+    let availableMedium = [];
+    let availableHard = [];
+
+    function initScenarioPools() {
+        // Fill pools with indices. Level 1 (Index 0) is excluded as it's forced first.
+        availableEasy = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        availableMedium = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+        availableHard = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+    }
+
+    // Helper to grab and remove a random element from an array
+    function popRandom(arr) {
+        if (arr.length === 0) return null;
+        const randIdx = Math.floor(Math.random() * arr.length);
+        return arr.splice(randIdx, 1)[0];
+    }
+
+    function loadNextCustomer() {
+        let nextIndex = 0;
+
+        if (timeLeft === 180 && !activeScenario) {
+            // VERY FIRST TICKET: Always Holly (Index 0)
+            nextIndex = 0;
+        } else {
+            // Determine which pool to pull from based on time, but fallback if empty
+            if (timeLeft > 120 && availableEasy.length > 0) {
+                nextIndex = popRandom(availableEasy);
+            } else if (timeLeft > 60 && availableMedium.length > 0) {
+                nextIndex = popRandom(availableMedium);
+            } else if (availableMedium.length === 0 && availableHard.length > 0 && timeLeft > 120) {
+                // Bleed-over: Cleared Easy AND Medium before 120s! Go to Hard early.
+                nextIndex = popRandom(availableHard);
+            } else if (availableEasy.length === 0 && availableMedium.length > 0 && timeLeft > 120) {
+                // Bleed-over: Cleared Easy before 120s. Go to Medium early.
+                nextIndex = popRandom(availableMedium);
+            } else if (availableMedium.length === 0 && availableHard.length > 0 && timeLeft > 60) {
+                // Bleed-over: Cleared Medium before 60s. Go to Hard early.
+                nextIndex = popRandom(availableHard);
+            } else if (availableHard.length > 0) {
+                // Standard Hard minute
+                nextIndex = popRandom(availableHard);
+            } else {
+                // They cleared ALL 30 SCENARIOS before 3 minutes! End the game early.
+                clearInterval(gameTimer);
+                endGame();
+                return;
+            }
+        }
+
+        activeScenario = SCENARIOS[nextIndex];
+
+        // Reset all form inputs and scroll position before showing new customer
+        resetFormBorders();
+        const mainContainer = document.querySelector('main');
+        if (mainContainer) mainContainer.scrollTop = 0;
+
+        // Populate Inbox Modal UI
+        document.getElementById('promptInitials').innerText = activeScenario.name[0];
+        document.getElementById('promptName').innerText = activeScenario.name;
+        document.getElementById('promptCarType').innerText = activeScenario.carInfo;
+        document.getElementById('promptMainText').innerText = activeScenario.story;
+
+        // Pop the modal!
+        const inboxModal = document.getElementById('inboxModal');
+        inboxModal.style.opacity = '1';
+        inboxModal.style.pointerEvents = 'auto';
+        document.getElementById('inboxCard').style.transform = 'scale(1)';
+    }
+
+    // --- DYNAMIC UI UPDATES ---
+    function updateCoverageDaysText() {
+        const coverageText = document.getElementById('policyCoverageText');
+        if (!selectedVehicle || !activeScenario) {
+            coverageText.innerHTML = `Select a vehicle class to calculate covered days.`;
+            return;
+        }
+        const rate = VEHICLE_RATES[selectedVehicle];
+        const maxDays = Math.floor(activeScenario.policyMax / rate);
+        coverageText.innerHTML = `Based on policy, customer is covered for up to <span class="text-entegral-green font-black">${maxDays} days</span> of a ${selectedVehicle}.`;
+    }
+
+    function resetFormBorders() {
+        selectedDate = null;
+        selectedLocation = null;
+        selectedVehicle = null;
+        selectedAddon = null;
+        currentRentalLength = 7;
+        document.getElementById('rentalLengthDisplay').innerText = currentRentalLength;
+
+        document.querySelectorAll('.date-option-btn, .location-option-btn, .vehicle-option-btn, .addon-option-btn').forEach(btn => {
+            btn.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+            btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
         });
 
-        // Open Inbox
-        document.getElementById('viewActivePromptBtn').addEventListener('click', () => {
-            const inboxModal = document.getElementById('inboxModal');
+        // Reset validation highlights
+        ['date', 'location', 'vehicle'].forEach(type => {
+            const section = document.getElementById(type + 'Section');
+            if(section) {
+                section.classList.remove('bg-red-50', 'border-red-400');
+                section.classList.add('bg-white', 'border-slate-200');
+            }
+        });
+
+        updateCoverageDaysText();
+        document.getElementById('policyAuditLine').innerHTML = `<span>✅</span> WITHIN POLICY LIMITS`;
+        document.getElementById('policyAuditLine').parentElement.classList.remove('border-red-500', 'bg-red-50');
+    }
+
+    // Rental Length Stepper Logic
+    let currentRentalLength = 7;
+    const lengthDisplay = document.getElementById('rentalLengthDisplay');
+
+    document.getElementById('lengthMinusBtn').addEventListener('click', () => {
+        if (currentRentalLength > 1) {
+            currentRentalLength--;
+            lengthDisplay.innerText = currentRentalLength;
+            checkPolicyAudit();
+        }
+    });
+
+    document.getElementById('lengthPlusBtn').addEventListener('click', () => {
+        if (currentRentalLength < 30) {
+            currentRentalLength++;
+            lengthDisplay.innerText = currentRentalLength;
+            checkPolicyAudit();
+        }
+    });
+
+    // --- EVENT LISTENERS FOR SELECTIONS ---
+    function handleSelection(groupClass, type, event) {
+        playSound('click');
+        const btns = document.querySelectorAll(`.${groupClass}`);
+
+        let currentVal = type === 'date' ? selectedDate :
+            type === 'location' ? selectedLocation :
+                type === 'vehicle' ? selectedVehicle : selectedAddon;
+
+        const targetVal = event.currentTarget.dataset.val;
+
+        // If they tap the already selected button, toggle it off
+        if (targetVal === currentVal) {
+            event.currentTarget.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+            event.currentTarget.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+            if (type === 'date') selectedDate = null;
+            if (type === 'location') selectedLocation = null;
+            if (type === 'vehicle') selectedVehicle = null;
+            if (type === 'addon') selectedAddon = null;
+        } else {
+            // Otherwise clear all and select this one
+            btns.forEach(b => {
+                b.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+                b.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+            });
+            event.currentTarget.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+            event.currentTarget.classList.add('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+            if (type === 'date') selectedDate = targetVal;
+            if (type === 'location') selectedLocation = targetVal;
+            if (type === 'vehicle') selectedVehicle = targetVal;
+            if (type === 'addon') selectedAddon = targetVal;
+        }
+
+        // Trigger dynamic checks if vehicle is selected
+        if (type === 'vehicle') {
+            updateCoverageDaysText();
+        }
+        checkPolicyAudit();
+    }
+
+    function checkPolicyAudit() {
+        const auditLine = document.getElementById('policyAuditLine');
+        if (!selectedVehicle || !activeScenario) {
+            auditLine.innerHTML = `<span>✅</span> WITHIN POLICY LIMITS`;
+            auditLine.parentElement.classList.remove('border-red-500', 'bg-red-50');
+            return;
+        }
+        const rate = VEHICLE_RATES[selectedVehicle];
+        const totalCost = rate * currentRentalLength;
+
+        if (totalCost > activeScenario.policyMax) {
+            auditLine.innerHTML = `<span class="animate-pulse">❌</span> EXCEEDS LIMITS!`;
+            auditLine.parentElement.classList.add('border-red-500', 'bg-red-50');
+        } else {
+            auditLine.innerHTML = `<span>✅</span> WITHIN POLICY LIMITS`;
+            auditLine.parentElement.classList.remove('border-red-500', 'bg-red-50');
+        }
+    }
+
+    document.querySelectorAll('.date-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('date-option-btn', 'date', e)));
+    document.querySelectorAll('.location-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('location-option-btn', 'location', e)));
+    document.querySelectorAll('.vehicle-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('vehicle-option-btn', 'vehicle', e)));
+    document.querySelectorAll('.addon-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('addon-option-btn', 'addon', e)));
+
+    // --- DISPATCH SCORING ENGINE ---
+    document.getElementById('dispatchBtn').addEventListener('click', () => {
+        if (!activeScenario) return;
+
+        // Check if all required fields are selected visually (No alert popups)
+        let missingField = false;
+        let firstMissingNode = null;
+
+        ['date', 'location', 'vehicle'].forEach(type => {
+            const section = document.getElementById(type + 'Section');
+            // Reset styles first
+            section.classList.remove('bg-red-50', 'border-red-400');
+            section.classList.add('bg-white', 'border-slate-200');
+
+            let isSelected = false;
+            if (type === 'date' && selectedDate) isSelected = true;
+            if (type === 'location' && selectedLocation) isSelected = true;
+            if (type === 'vehicle' && selectedVehicle) isSelected = true;
+
+            if (!isSelected) {
+                missingField = true;
+                section.classList.remove('bg-white', 'border-slate-200');
+                section.classList.add('bg-red-50', 'border-red-400');
+                if (!firstMissingNode) firstMissingNode = section;
+            }
+        });
+
+        if (missingField) {
+            firstMissingNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return; // Stop dispatch
+        }
+
+        const formattedAddon = selectedAddon || "None";
+        let ticketScore = 10;
+        let deductionText = [];
+
+        // 1. Policy Violation Check (Instant 0 points)
+        const rate = VEHICLE_RATES[selectedVehicle];
+        const totalCost = rate * currentRentalLength;
+        if (totalCost > activeScenario.policyMax) {
+            showFeedbackModal(0, ["EXCEEDED POLICY MAX LIMIT!"]);
+            return; // Stop grading, they failed.
+        }
+
+        // 2. Deduction Checks
+        if (selectedDate !== activeScenario.expected.date) {
+            ticketScore -= 2;
+            deductionText.push("-2: Incorrect Start Date");
+        }
+        if (selectedLocation !== activeScenario.expected.location) {
+            ticketScore -= 2;
+            deductionText.push("-2: Incorrect Location");
+        }
+        // Length penalty ONLY if too short. Overestimating (if under budget) is fine!
+        if (currentRentalLength < activeScenario.expected.length) {
+            ticketScore -= 2;
+            deductionText.push("-2: Rental Length Too Short");
+        }
+        if (formattedAddon !== activeScenario.expected.addon) {
+            ticketScore -= 2;
+            deductionText.push("-2: Incorrect Add-on");
+        }
+
+        // 3. Class Downgrade Check (Only penalty if they downgraded unnecessarily)
+        if (selectedVehicle !== activeScenario.expected.clazz) {
+            const expectedRate = VEHICLE_RATES[activeScenario.expected.clazz];
+            const expectedCost = expectedRate * activeScenario.expected.length;
+
+            // If they could have afforded what was expected, but selected a cheaper car = Unhappy customer
+            if (expectedCost <= activeScenario.policyMax && rate < expectedRate) {
+                ticketScore -= 2;
+                deductionText.push("-2: Unnecessary Vehicle Downgrade");
+            }
+        }
+
+        // Ensure score doesn't drop below 0 somehow
+        ticketScore = Math.max(0, ticketScore);
+
+        // Trigger Modal
+        showFeedbackModal(ticketScore, deductionText);
+    });
+
+    function showFeedbackModal(ticketScore, detailsArray) {
+        const modal = document.getElementById('dispatchFeedbackModal');
+        const card = document.getElementById('dispatchFeedbackCard');
+        const stamp = document.getElementById('feedbackStamp');
+        const scoreText = document.getElementById('feedbackScoreText');
+        const detailsBox = document.getElementById('feedbackDetails');
+
+        // Update Global Score
+        score += ticketScore;
+        document.getElementById('scoreText').innerText = score;
+
+        // Paint UI based on score
+        scoreText.innerText = `${ticketScore} / 10`;
+        detailsBox.innerHTML = detailsArray.join("<br>");
+
+        if (ticketScore === 10) {
+            playSound('click'); // Add success chime later
+            stamp.innerText = "PERFECT!";
+            stamp.className = "text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-entegral-green";
+            card.className = "bg-white border-4 border-entegral-green rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200";
+        } else if (ticketScore === 0 && detailsArray[0] === "EXCEEDED POLICY MAX LIMIT!") {
+            playSound('fail');
+            stamp.innerText = "AUDITED!";
+            stamp.className = "text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-red-500 animate-pulse";
+            card.className = "bg-white border-4 border-red-500 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200";
+        } else {
+            playSound('click'); // Add mild clunk later
+            stamp.innerText = "OKAY";
+            stamp.className = "text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-yellow-400";
+            card.className = "bg-white border-4 border-yellow-400 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200";
+        }
+
+        modal.style.opacity = '1';
+        modal.style.pointerEvents = 'auto';
+        card.style.transform = 'scale(1)';
+    }
+
+    document.getElementById('nextCustomerBtn').addEventListener('click', () => {
+        playSound('click');
+        const modal = document.getElementById('dispatchFeedbackModal');
+        modal.style.opacity = '0';
+        modal.style.pointerEvents = 'none';
+        document.getElementById('dispatchFeedbackCard').style.transform = 'scale(0.95)';
+
+        // Only load next if timer isn't dead
+        if (timeLeft > 0) {
+            loadNextCustomer();
+        }
+    });
+
+    // --- AUDIO ENGINE ---
+    let audioCtx = null;
+    function playSound(type) {
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, now);
+                osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'fail') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.linearRampToValueAtTime(110, now + 0.3);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        } catch (e) { console.error(e); }
+    }
+
+    // --- GAME LOOP & TIMER ---
+    function startGame() {
+        score = 0;
+        timeLeft = 180; // 3 minutes for production
+        activeScenario = null;
+        document.getElementById('scoreText').innerText = score;
+
+        // Fill the non-repeating scenario arrays
+        initScenarioPools();
+
+        // Load the first customer (Holly)
+        loadNextCustomer();
+
+        // Start Timer Interval
+        if (gameTimer) clearInterval(gameTimer);
+        gameTimer = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+        timeLeft--;
+
+        // Update UI timer text first so it definitely hits 00:00
+        const minutes = Math.floor(Math.max(0, timeLeft) / 60);
+        const seconds = Math.max(0, timeLeft) % 60;
+        document.getElementById('timerText').innerText =
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(gameTimer);
+            setTimeout(endGame, 100); // Tiny delay to let the DOM paint 00:00
+            return;
+        }
+
+        // Warning pulse if < 30 seconds
+        if (timeLeft < 30) {
+            document.getElementById('timerText').parentElement.classList.add('bg-red-900', 'border-red-500');
+        }
+    }
+
+    function endGame() {
+        playSound('fail');
+
+        const modal = document.getElementById('gameOverModal');
+        const card = document.getElementById('gameOverCard');
+        const loadingCard = document.getElementById('loadingCard');
+        const inputZone = document.getElementById('highScoreInputZone');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Set final score text
+        document.getElementById('finalScoreText').innerText = `${score} PTS`;
+
+        // 1. INSTANTLY reveal the modal backdrop and loading card (No delay!)
+        modal.style.opacity = '1';
+        modal.style.pointerEvents = 'auto';
+        loadingCard.classList.remove('hidden');
+        card.classList.add('hidden');
+        card.style.transform = 'scale(0.95)';
+
+        // Function to reveal the completed modal seamlessly
+        const revealFinalResults = () => {
+            loadingCard.classList.add('hidden');
+            card.classList.remove('hidden');
+            setTimeout(() => {
+                card.style.transform = 'scale(1)';
+            }, 50);
+        };
+
+        // Fetch live scores first BEFORE opening the modal
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+            google.script.run.withSuccessHandler(function(scores) {
+                let qualifies = false;
+                if (!scores || scores.length < 3) {
+                    qualifies = true;
+                } else {
+                    qualifies = score > scores[2].score;
+                }
+
+                if (qualifies) {
+                    // Show input form inline, keep play again hidden
+                    inputZone.classList.remove('hidden');
+                    restartBtn.classList.add('hidden');
+                    document.getElementById('playerNameInput').value = "";
+                } else {
+                    // Just show default play again
+                    inputZone.classList.add('hidden');
+                    restartBtn.classList.remove('hidden');
+                }
+
+                // Render scores list
+                renderHighScoresUI(scores);
+
+                // Now reveal the complete modal seamlessly!
+                revealFinalResults();
+
+                // Focus input if shown
+                if (qualifies) {
+                    document.getElementById('playerNameInput').focus();
+                }
+            }).getTopScores();
+        } else {
+            // Mock test path (forced high score)
+            setTimeout(() => {
+                inputZone.classList.remove('hidden');
+                restartBtn.classList.add('hidden');
+                document.getElementById('playerNameInput').value = "";
+                renderHighScoresUI();
+                revealFinalResults();
+            }, 1200); // Tiny delay to show off the loader
+        }
+    }
+
+    // Handle inline Submit Score Click
+    document.getElementById('submitScoreBtn').addEventListener('click', () => {
+        playSound('click');
+        const nameInput = document.getElementById('playerNameInput');
+        const nameVal = nameInput.value.trim().toUpperCase();
+
+        if (!nameVal) {
+            alert("Please enter your name to claim your high score!");
+            return;
+        }
+
+        const inputZone = document.getElementById('highScoreInputZone');
+        const restartBtn = document.getElementById('restartBtn');
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+            // Disable button to prevent double-submit
+            document.getElementById('submitScoreBtn').disabled = true;
+            document.getElementById('submitScoreBtn').innerText = "SUBMITTING...";
+
+            google.script.run.withSuccessHandler(function() {
+                // Re-fetch, render scoreboard, hide input, show restart
+                google.script.run.withSuccessHandler(function(scores) {
+                    renderHighScoresUI(scores);
+                    inputZone.classList.add('hidden');
+                    restartBtn.classList.remove('hidden');
+
+                    // Reset button
+                    document.getElementById('submitScoreBtn').disabled = false;
+                    document.getElementById('submitScoreBtn').innerText = "SUBMIT SCORE ➔";
+                }).getTopScores();
+            }).saveScore(nameVal, score);
+        } else {
+            // Mock offline submission simulation
+            inputZone.classList.add('hidden');
+            restartBtn.classList.remove('hidden');
+
+            const mockList = [
+                { name: nameVal, score: score },
+                { name: "ALEX", score: 90 },
+                { name: "SARAH", score: 70 }
+            ];
+            renderHighScoresUI(mockList);
+        }
+    });
+
+    function renderHighScoresUI(scores) {
+        const listContainer = document.querySelector('#gameOverModal ul');
+        if (!listContainer) return;
+
+        let displayScores = scores || [];
+        // Padding with fake data if sheet has less than 3
+        const fallbackDefaults = [
+            { name: "ALEX", score: 90 },
+            { name: "SARAH", score: 70 },
+            { name: "CHANDLER", score: 40 }
+        ];
+
+        for (let i = 0; i < 3; i++) {
+            if (!displayScores[i]) {
+                displayScores.push(fallbackDefaults[i]);
+            }
+        }
+
+        displayScores = displayScores.slice(0, 3);
+
+        listContainer.innerHTML = `
+                <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5 font-arcade">
+                    <span class="flex items-center gap-2"><span class="text-entegral-green">1ST</span> ${displayScores[0].name}</span>
+                    <span class="text-entegral-green">${displayScores[0].score} PTS</span>
+                </li>
+                <li class="flex justify-between items-center text-slate-200 border-b border-slate-800 pb-1.5 font-arcade">
+                    <span class="flex items-center gap-2"><span class="text-enterprise-green">2ND</span> ${displayScores[1].name}</span>
+                    <span class="text-enterprise-green">${displayScores[1].score} PTS</span>
+                </li>
+                <li class="flex justify-between items-center text-slate-200 font-arcade">
+                    <span class="text-slate-400 flex items-center gap-2"><span>3RD</span> ${displayScores[2].name}</span>
+                    <span class="text-slate-400">${displayScores[2].score} PTS</span>
+                </li>
+            `;
+    }
+
+    // Start Game Listener Update
+    document.getElementById('startGameBtn').addEventListener('click', () => {
+        playSound('click');
+        const startScreen = document.getElementById('startScreen');
+        const gameBoard = document.getElementById('gameBoard');
+        const inboxModal = document.getElementById('inboxModal');
+
+        startScreen.style.opacity = '0';
+        startScreen.style.pointerEvents = 'none';
+
+        gameBoard.style.opacity = '1';
+        gameBoard.style.pointerEvents = 'auto';
+
+        startGame(); // Trigger the 3-minute timer
+
+        setTimeout(() => {
             inboxModal.style.opacity = '1';
             inboxModal.style.pointerEvents = 'auto';
             document.getElementById('inboxCard').style.transform = 'scale(1)';
-        });
+        }, 300);
+    });
 
-        // Close Inbox
-        document.getElementById('closeInboxBtn').addEventListener('click', () => {
-            const inboxModal = document.getElementById('inboxModal');
-            inboxModal.style.opacity = '0';
-            inboxModal.style.pointerEvents = 'none';
-            document.getElementById('inboxCard').style.transform = 'scale(0.95)';
-        });
-                let score = 0; let ticketsAttempted = 0; let timeLeft = 180; let gameTimer = null; let activeScenario = null; let selectedDate = null; let selectedLocation = null; let selectedVehicle = null; let selectedAddon = null; const VEHICLE_RATES = { "Economy": 30, "Sedan": 40, "SUV": 55, "Pickup": 60, "Minivan": 60, "Luxury": 80 }; let availableEasy = []; let availableMedium = []; let availableHard = []; function initScenarioPools() { availableEasy = [1, 2, 3, 4, 5, 6, 7, 8, 9]; availableMedium = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]; availableHard = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29]; } function popRandom(arr) { if (arr.length === 0) return null; const randIdx = Math.floor(Math.random() * arr.length); return arr.splice(randIdx, 1)[0]; } function loadNextCustomer() { let nextIndex = 0; if (timeLeft === 180 && !activeScenario) { nextIndex = 0; } else { if (timeLeft > 120 && availableEasy.length > 0) { nextIndex = popRandom(availableEasy); } else if (timeLeft > 60 && availableMedium.length > 0) { nextIndex = popRandom(availableMedium); } else if (availableMedium.length === 0 && availableHard.length > 0 && timeLeft > 120) { nextIndex = popRandom(availableHard); } else if (availableEasy.length === 0 && availableMedium.length > 0 && timeLeft > 120) { nextIndex = popRandom(availableMedium); } else if (availableMedium.length === 0 && availableHard.length > 0 && timeLeft > 60) { nextIndex = popRandom(availableHard); } else if (availableHard.length > 0) { nextIndex = popRandom(availableHard); } else { clearInterval(gameTimer); endGame(); return; } } activeScenario = SCENARIOS[nextIndex]; resetFormBorders(); const mainContainer = document.getElementById('mainContainer'); if (mainContainer) mainContainer.scrollTop = 0; document.getElementById('promptInitials').innerText = activeScenario.name[0]; document.getElementById('promptName').innerText = activeScenario.name; document.getElementById('promptCarType').innerText = activeScenario.carInfo; document.getElementById('promptMainText').innerText = activeScenario.story; const inboxModal = document.getElementById('inboxModal'); inboxModal.style.opacity = '1'; inboxModal.style.pointerEvents = 'auto'; document.getElementById('inboxCard').style.transform = 'scale(1)'; } function updateCoverageDaysText() { const coverageText = document.getElementById('policyCoverageText'); if (!selectedVehicle || !activeScenario) { coverageText.innerHTML = 'Select a vehicle class to calculate covered days.'; return; } const rate = VEHICLE_RATES[selectedVehicle]; const maxDays = Math.floor(activeScenario.policyMax / rate); coverageText.innerHTML = 'Based on policy, customer is covered for up to <span class="text-entegral-green font-black">' + maxDays + ' days</span> of a ' + selectedVehicle + '.'; } function resetFormBorders() { selectedDate = null; selectedLocation = null; selectedVehicle = null; selectedAddon = null; currentRentalLength = 7; document.getElementById('rentalLengthDisplay').innerText = currentRentalLength; document.querySelectorAll('.date-option-btn, .location-option-btn, .vehicle-option-btn, .addon-option-btn').forEach(btn => { btn.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green'); btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200'); }); ['date', 'location', 'vehicle'].forEach(type => { const section = document.getElementById(type + 'Section'); if(section) { section.classList.remove('bg-red-50', 'border-red-400'); section.classList.add('bg-white', 'border-slate-200'); } }); updateCoverageDaysText(); document.getElementById('policyAuditLine').innerHTML = '<span>✅</span> WITHIN POLICY LIMITS'; document.getElementById('policyAuditLine').parentElement.classList.remove('border-red-500', 'bg-red-50'); } let currentRentalLength = 7; const lengthDisplay = document.getElementById('rentalLengthDisplay'); document.getElementById('lengthMinusBtn').addEventListener('click', () => { if (currentRentalLength > 1) { currentRentalLength--; lengthDisplay.innerText = currentRentalLength; checkPolicyAudit(); } }); document.getElementById('lengthPlusBtn').addEventListener('click', () => { if (currentRentalLength < 30) { currentRentalLength++; lengthDisplay.innerText = currentRentalLength; checkPolicyAudit(); } }); function handleSelection(groupClass, type, event) { const btns = document.querySelectorAll('.' + groupClass); let currentVal = type === 'date' ? selectedDate : type === 'location' ? selectedLocation : type === 'vehicle' ? selectedVehicle : selectedAddon; const targetVal = event.currentTarget.dataset.val; if (targetVal === currentVal) { event.currentTarget.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green'); event.currentTarget.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200'); if (type === 'date') selectedDate = null; if (type === 'location') selectedLocation = null; if (type === 'vehicle') selectedVehicle = null; if (type === 'addon') selectedAddon = null; } else { btns.forEach(b => { b.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green'); b.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200'); }); event.currentTarget.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200'); event.currentTarget.classList.add('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green'); if (type === 'date') selectedDate = targetVal; if (type === 'location') selectedLocation = targetVal; if (type === 'vehicle') selectedVehicle = targetVal; if (type === 'addon') selectedAddon = targetVal; } if (type === 'vehicle') { updateCoverageDaysText(); } checkPolicyAudit(); } function checkPolicyAudit() { const auditLine = document.getElementById('policyAuditLine'); if (!selectedVehicle || !activeScenario) { auditLine.innerHTML = '<span>✅</span> WITHIN POLICY LIMITS'; auditLine.parentElement.classList.remove('border-red-500', 'bg-red-50'); return; } const rate = VEHICLE_RATES[selectedVehicle]; const totalCost = rate * currentRentalLength; if (totalCost > activeScenario.policyMax) { auditLine.innerHTML = '<span class="animate-pulse">❌</span> EXCEEDS LIMITS!'; auditLine.parentElement.classList.add('border-red-500', 'bg-red-50'); } else { auditLine.innerHTML = '<span>✅</span> WITHIN POLICY LIMITS'; auditLine.parentElement.classList.remove('border-red-500', 'bg-red-50'); } } document.querySelectorAll('.date-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('date-option-btn', 'date', e))); document.querySelectorAll('.location-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('location-option-btn', 'location', e))); document.querySelectorAll('.vehicle-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('vehicle-option-btn', 'vehicle', e))); document.querySelectorAll('.addon-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('addon-option-btn', 'addon', e))); document.getElementById('dispatchBtn').addEventListener('click', () => { if (!activeScenario) return; let missingField = false; let firstMissingNode = null; ['date', 'location', 'vehicle'].forEach(type => { const section = document.getElementById(type + 'Section'); section.classList.remove('bg-red-50', 'border-red-400'); section.classList.add('bg-white', 'border-slate-200'); let isSelected = false; if (type === 'date' && selectedDate) isSelected = true; if (type === 'location' && selectedLocation) isSelected = true; if (type === 'vehicle' && selectedVehicle) isSelected = true; if (!isSelected) { missingField = true; section.classList.remove('bg-white', 'border-slate-200'); section.classList.add('bg-red-50', 'border-red-400'); if (!firstMissingNode) firstMissingNode = section; } }); if (missingField) { firstMissingNode.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; } const formattedAddon = selectedAddon || 'None'; let ticketScore = 10; let deductionText = []; const rate = VEHICLE_RATES[selectedVehicle]; const totalCost = rate * currentRentalLength; if (totalCost > activeScenario.policyMax) { showFeedbackModal(0, ['EXCEEDED POLICY MAX LIMIT!']); return; } if (selectedDate !== activeScenario.expected.date) { ticketScore -= 2; deductionText.push('-2: Incorrect Start Date'); } if (selectedLocation !== activeScenario.expected.location) { ticketScore -= 2; deductionText.push('-2: Incorrect Location'); } if (currentRentalLength < activeScenario.expected.length) { ticketScore -= 2; deductionText.push('-2: Rental Length Too Short'); } if (formattedAddon !== activeScenario.expected.addon) { ticketScore -= 2; deductionText.push('-2: Incorrect Add-on'); } if (selectedVehicle !== activeScenario.expected.clazz) { const expectedRate = VEHICLE_RATES[activeScenario.expected.clazz]; const expectedCost = expectedRate * activeScenario.expected.length; if (expectedCost <= activeScenario.policyMax && rate < expectedRate) { ticketScore -= 2; deductionText.push('-2: Unnecessary Vehicle Downgrade'); } } ticketScore = Math.max(0, ticketScore); showFeedbackModal(ticketScore, deductionText); }); function showFeedbackModal(ticketScore, detailsArray) { ticketsAttempted++; const modal = document.getElementById('dispatchFeedbackModal'); const card = document.getElementById('dispatchFeedbackCard'); const stamp = document.getElementById('feedbackStamp'); const scoreText = document.getElementById('feedbackScoreText'); const detailsBox = document.getElementById('feedbackDetails'); score += ticketScore; document.getElementById('scoreText').innerText = score; scoreText.innerText = ticketScore + ' / 10'; detailsBox.innerHTML = detailsArray.join('<br>'); if (ticketScore === 10) { stamp.innerText = 'PERFECT!'; stamp.className = 'text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-entegral-green'; card.className = 'bg-white border-4 border-entegral-green rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200'; } else if (ticketScore === 0 && detailsArray[0] === 'EXCEEDED POLICY MAX LIMIT!') { stamp.innerText = 'AUDITED!'; stamp.className = 'text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-red-500 animate-pulse'; card.className = 'bg-white border-4 border-red-500 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200'; } else { stamp.innerText = 'OKAY'; stamp.className = 'text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-yellow-400'; card.className = 'bg-white border-4 border-yellow-400 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200'; } modal.style.opacity = '1'; modal.style.pointerEvents = 'auto'; card.style.transform = 'scale(1)'; } document.getElementById('nextCustomerBtn').addEventListener('click', () => { const modal = document.getElementById('dispatchFeedbackModal'); modal.style.opacity = '0'; modal.style.pointerEvents = 'none'; document.getElementById('dispatchFeedbackCard').style.transform = 'scale(0.95)'; if (timeLeft > 0) { loadNextCustomer(); } }); function startGame() { score = 0; ticketsAttempted = 0; timeLeft = 180; activeScenario = null; document.getElementById('scoreText').innerText = score; initScenarioPools(); loadNextCustomer(); if (gameTimer) clearInterval(gameTimer); gameTimer = setInterval(updateTimer, 1000); } function updateTimer() { timeLeft--; const minutes = Math.floor(Math.max(0, timeLeft) / 60); const seconds = Math.max(0, timeLeft) % 60; const mStr = minutes.toString().length === 1 ? '0' + minutes : minutes; const sStr = seconds.toString().length === 1 ? '0' + seconds : seconds; document.getElementById('timerText').innerText = mStr + ':' + sStr; if (timeLeft <= 0) { clearInterval(gameTimer); setTimeout(endGame, 100); return; } if (timeLeft < 30) { document.getElementById('timerText').parentElement.classList.add('bg-red-900', 'border-red-500'); } } function endGame() { const modal = document.getElementById('gameOverModal'); const card = document.getElementById('gameOverCard'); const loadingCard = document.getElementById('loadingCard'); const maxPoints = ticketsAttempted * 10; document.getElementById('finalScoreText').innerText = score + ' / ' + maxPoints; modal.style.opacity = '1'; modal.style.pointerEvents = 'auto'; if(loadingCard) loadingCard.classList.remove('hidden'); if(card) { card.classList.add('hidden'); card.style.transform = 'scale(0.95)'; } const revealFinalResults = () => { if(loadingCard) loadingCard.classList.add('hidden'); if(card) { card.classList.remove('hidden'); setTimeout(() => { card.style.transform = 'scale(1)'; }, 50); } }; setTimeout(() => { revealFinalResults(); }, 1200); } document.getElementById('startGameBtn').addEventListener('click', () => { const startScreen = document.getElementById('startScreen'); const gameBoard = document.getElementById('gameBoard'); const inboxModal = document.getElementById('inboxModal'); startScreen.style.opacity = '0'; startScreen.style.pointerEvents = 'none'; gameBoard.style.opacity = '1'; gameBoard.style.pointerEvents = 'auto'; startGame(); setTimeout(() => { inboxModal.style.opacity = '1'; inboxModal.style.pointerEvents = 'auto'; document.getElementById('inboxCard').style.transform = 'scale(1)'; }, 300); }); document.getElementById('restartBtn').addEventListener('click', () => { const inboxModal = document.getElementById('inboxModal'); inboxModal.style.opacity = '0'; inboxModal.style.pointerEvents = 'none'; document.getElementById('inboxCard').style.transform = 'scale(0.95)'; const gameOverModal = document.getElementById('gameOverModal'); gameOverModal.style.opacity = '0'; gameOverModal.style.pointerEvents = 'none'; if(document.getElementById('gameOverCard')) document.getElementById('gameOverCard').style.transform = 'scale(0.95)'; const startScreen = document.getElementById('startScreen'); const gameBoard = document.getElementById('gameBoard'); gameBoard.style.opacity = '0'; gameBoard.style.pointerEvents = 'none'; startScreen.style.opacity = '1'; startScreen.style.pointerEvents = 'auto'; document.getElementById('timerText').innerText = '03:00'; document.getElementById('timerText').parentElement.classList.remove('bg-red-900', 'border-red-500'); resetFormBorders(); }); document.getElementById('viewActivePromptBtn').addEventListener('click', () => { const inboxModal = document.getElementById('inboxModal'); inboxModal.style.opacity = '1'; inboxModal.style.pointerEvents = 'auto'; document.getElementById('inboxCard').style.transform = 'scale(1)'; }); document.getElementById('closeInboxBtn').addEventListener('click', () => { const inboxModal = document.getElementById('inboxModal'); inboxModal.style.opacity = '0'; inboxModal.style.pointerEvents = 'none'; document.getElementById('inboxCard').style.transform = 'scale(0.95)'; });
+    // Restart Game from Game Over Modal
+    document.getElementById('restartBtn').addEventListener('click', () => {
+        playSound('click');
 
-    </script>
+        // Explicitly close the active inbox request popup
+        const inboxModal = document.getElementById('inboxModal');
+        inboxModal.style.opacity = '0';
+        inboxModal.style.pointerEvents = 'none';
+        document.getElementById('inboxCard').style.transform = 'scale(0.95)';
+
+        // Hide game over modal
+        const gameOverModal = document.getElementById('gameOverModal');
+        gameOverModal.style.opacity = '0';
+        gameOverModal.style.pointerEvents = 'none';
+        document.getElementById('gameOverCard').style.transform = 'scale(0.95)';
+
+        // Revert game board back to start screen
+        const startScreen = document.getElementById('startScreen');
+        const gameBoard = document.getElementById('gameBoard');
+        gameBoard.style.opacity = '0';
+        gameBoard.style.pointerEvents = 'none';
+        startScreen.style.opacity = '1';
+        startScreen.style.pointerEvents = 'auto';
+
+        // Reset timer text back to 03:00
+        document.getElementById('timerText').innerText = "03:00";
+        document.getElementById('timerText').parentElement.classList.remove('bg-red-900', 'border-red-500');
+
+        // Reset all selection inputs & stepper to default
+        resetFormBorders();
+    });
+
+</script>
 </body>
 </html>
