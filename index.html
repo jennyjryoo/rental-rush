@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rental Rush</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        .font-arcade { font-family: 'Press Start 2P', cursive; }
+        
+        .bg-entegral-navy { background-color: #013e71; }
+        .text-entegral-navy { color: #013e71; }
+        .border-entegral-navy { border-color: #013e71; }
+        
+        .bg-entegral-green { background-color: #93d40d; }
+        .text-entegral-green { color: #93d40d; }
+        .border-entegral-green { border-color: #93d40d; }
+        
+        .text-enterprise-green { color: #00c763; }
+        .bg-enterprise-green { background-color: #00c763; }
+
+        .bg-arcade-dark { background-color: #1a1a2e; }
+
+        /* Lock the absolute dimensions for the Pixel 6 viewport */
+        .app-shell {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background-color: #f1f5f9;
+        }
+
+        /* Hide scrollbar for game board */
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Scanline Overlay (Dark Mode) */
+        .scanlines-dark {
+            position: relative;
+        }
+        .scanlines-dark::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0),
+                rgba(0, 0, 0, 0) 50%,
+                rgba(0, 0, 0, 0.15) 50%,
+                rgba(0, 0, 0, 0.15)
+            );
+            background-size: 100% 6px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Scanline Overlay (Light Mode) */
+        .scanlines-light {
+            position: relative;
+        }
+        .scanlines-light::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0),
+                rgba(255, 255, 255, 0) 50%,
+                rgba(0, 0, 0, 0.02) 50%,
+                rgba(0, 0, 0, 0.02)
+            );
+            background-size: 100% 6px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Chunky Arcade Text Shadow */
+        .text-arcade-shadow {
+            text-shadow: 3px 3px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000, 1px 1px 0px #000;
+        }
+
+        /* Vibrating Alarm Clock Buzz Animation */
+        @keyframes alarm-buzz {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-12deg); }
+            20%, 40%, 60%, 80% { transform: rotate(12deg); }
+        }
+        .animate-alarm-buzz {
+            display: inline-block;
+            animation: alarm-buzz 0.45s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The Mobile App Shell -->
+    <div class="app-shell">
+
+        <!-- START SCREEN -->
+        <div id="startScreen" class="absolute inset-0 z-50 bg-arcade-dark text-white flex flex-col justify-between p-6 scanlines-dark transition-opacity duration-300">
+            
+            <div class="flex flex-col items-center pt-8">
+                <!-- Flashing Arcade Header -->
+                <div class="text-center relative z-20">
+                    <p class="text-[10px] text-entegral-green font-arcade tracking-[0.2em] mb-2 animate-pulse uppercase">
+                        Beat The High Score
+                    </p>
+                    <h1 class="text-4xl md:text-5xl font-black italic text-white tracking-tighter leading-none text-arcade-shadow transform -skew-x-6">
+                        RENTAL<br>
+                        <span class="text-entegral-green">RUSH</span>
+                    </h1>
+                </div>
+
+                <!-- Animated 8-bit Car -->
+                <div class="w-full h-16 relative overflow-hidden my-6 z-20">
+                    <div class="absolute left-[-100px] animate-[drive_1.2s_linear_infinite]">
+                        <svg class="w-32 h-16" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Basic 8-bit car shape -->
+                            <rect x="10" y="20" width="80" height="20" fill="#00c763" />
+                            <rect x="25" y="10" width="40" height="10" fill="#ffffff" />
+                            <!-- Wheels -->
+                            <rect x="20" y="40" width="15" height="10" fill="#222" />
+                            <rect x="65" y="40" width="15" height="10" fill="#222" />
+                            <!-- Window divider -->
+                            <rect x="45" y="10" width="5" height="10" fill="#1a1a2e" />
+                            <!-- Headlight -->
+                            <rect x="85" y="25" width="5" height="5" fill="#fef08a" />
+                        </svg>
+                    </div>
+                </div>
+
+                <style>
+                    @keyframes drive {
+                        0% { transform: translateX(-100px); }
+                        100% { transform: translateX(calc(100vw + 100px)); }
+                    }
+                </style>
+
+                <!-- Fixed Pixel-Sized Instructions Box -->
+                <div class="w-full bg-slate-900 border-4 border-entegral-navy rounded-xl p-5 relative z-20 shadow-[0_0_20px_rgba(1,62,113,0.5)]">
+                    <h2 style="font-size: 20px; line-height: 24px;" class="font-black text-entegral-green uppercase mb-3 border-b-2 border-slate-700 pb-2">How To Play</h2>
+                    <ol style="font-size: 16px; line-height: 22px;" class="list-decimal list-inside text-slate-300 font-bold space-y-3">
+                        <li>Read the Customer Request text.</li>
+                        <li>Configure their perfect rental.</li>
+                        <li>Keep the length inside policy limits!</li>
+                        <li>Dispatch as many as you can!</li>
+                    </ol>
+                    
+                    <div class="mt-4 pt-3 border-t-2 border-slate-700">
+                        <span style="font-size: 14px;" class="font-black text-slate-500 uppercase tracking-widest block mb-1">Performance Review</span>
+                        <div class="flex justify-between items-center text-sm font-bold">
+                            <span class="text-entegral-green">✅ Perfect</span>
+                            <span class="text-yellow-400">🟡 Okay</span>
+                            <span class="text-red-500">❌ Audited</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <div class="w-full relative z-50 pt-6 pb-2">
+                <!-- We use a custom chunky button that depresses when clicked -->
+                <button id="startGameBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-2xl md:text-3xl py-4 rounded-xl border-b-[6px] border-[#5a8703] hover:bg-[#a6ec15] hover:border-[#6a9e04] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-wider flex justify-center items-center gap-2">
+                    CLOCK IN <span class="text-3xl leading-none">➔</span>
+                </button>
+            </div>
+            
+        </div>
+
+        <!-- MAIN GAME BOARD (Hidden initially) -->
+        <div id="gameBoard" class="absolute inset-0 z-40 bg-slate-100 flex flex-col opacity-0 pointer-events-none transition-opacity duration-300 scanlines-light">
+            
+            <!-- STICKY HEADER -->
+            <header class="bg-white border-b-2 border-slate-200 p-3 flex justify-between items-center shadow-sm shrink-0 relative z-20">
+                <div class="flex items-center gap-2">
+                    <div class="text-sm font-black italic text-slate-800 tracking-tighter leading-none transform -skew-x-6">
+                        RENTAL <span class="text-entegral-green">RUSH</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <!-- Score Display -->
+                    <div class="bg-slate-100 border-2 border-slate-300 px-3 py-1 rounded-md shadow-inner flex items-center gap-2">
+                        <span class="text-[10px] text-slate-400 font-bold font-arcade uppercase">PTS</span>
+                        <span id="scoreText" class="text-sm font-black text-entegral-navy font-arcade">0</span>
+                    </div>
+                    <!-- Timer Display -->
+                    <div class="bg-slate-900 border-2 border-slate-700 px-2 py-1 rounded-md flex items-center gap-1.5 shadow-inner transition-colors duration-300">
+                        <span class="text-[10px] text-slate-400 font-bold font-arcade uppercase">TIME</span>
+                        <span id="timerText" class="text-sm font-black text-white font-arcade tracking-wider">03:00</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- MAIN ACTIVE WORKSPACE (Configuration Grids) -->
+            <main class="flex-1 overflow-y-auto p-3 flex flex-col gap-3 pb-24 custom-scrollbar relative z-10">
+
+                <!-- 1. Start Date Selector -->
+                <div id="dateSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">1. Start Date</label>
+                    <div class="grid grid-cols-2 gap-2" id="dateGrid">
+                        <button data-val="TODAY" class="date-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">TODAY</button>
+                        <button data-val="REPAIR_DATE" class="date-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">REPAIR<br>DATE</button>
+                    </div>
+                </div>
+
+                <!-- 2. Location Selector -->
+                <div id="locationSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">2. Rental Branch Near</label>
+                    <div class="grid grid-cols-3 gap-2" id="locationGrid">
+                        <button data-val="Home" class="location-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">HOME</button>
+                        <button data-val="Repair Shop" class="location-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">SHOP</button>
+                        <button data-val="Work" class="location-option-btn bg-slate-50 border-2 border-slate-200 py-4 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">WORK</button>
+                    </div>
+                </div>
+
+                <!-- 3. Vehicle Class Selector -->
+                <div id="vehicleSection" class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0 transition-colors">
+                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">3. Vehicle Class</label>
+                    <div class="grid grid-cols-3 gap-2" id="vehicleGrid">
+                        <button data-val="Economy" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">ECONOMY</button>
+                        <button data-val="Sedan" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">SEDAN</button>
+                        <button data-val="SUV" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">SUV</button>
+                        <button data-val="Pickup" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">PICKUP</button>
+                        <button data-val="Minivan" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">MINIVAN</button>
+                        <button data-val="Luxury" class="vehicle-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-xs font-bold text-slate-700 cursor-pointer text-center transition-colors">LUXURY</button>
+                    </div>
+                </div>
+
+                <!-- 4. Rental Length -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
+                    <label class="text-sm font-black text-entegral-navy uppercase tracking-widest mb-3 block font-arcade border-b-2 border-slate-100 pb-2">4. Rental Length</label>
+                    <div class="flex items-center justify-center gap-4 mb-2">
+                        <button id="lengthMinusBtn" class="w-12 h-12 bg-slate-50 border-2 border-slate-300 rounded-lg text-2xl font-black text-slate-500 hover:bg-slate-200 active:bg-slate-300 transition-colors flex items-center justify-center cursor-pointer shadow-sm">-</button>
+                        <div class="w-24 text-center">
+                            <span id="rentalLengthDisplay" class="text-2xl font-black text-entegral-navy font-arcade">7</span>
+                            <span class="text-xs font-bold text-slate-400 block uppercase tracking-widest">Days</span>
+                        </div>
+                        <button id="lengthPlusBtn" class="w-12 h-12 bg-slate-50 border-2 border-slate-300 rounded-lg text-2xl font-black text-slate-500 hover:bg-slate-200 active:bg-slate-300 transition-colors flex items-center justify-center cursor-pointer shadow-sm">+</button>
+                    </div>
+                    <div class="text-center mt-2">
+                        <span id="policyCoverageText" class="text-[10px] text-slate-400 font-bold uppercase tracking-wide">Select a vehicle class to calculate covered days.</span>
+                    </div>
+                </div>
+
+                <!-- 5. Add-ons Toggles (Optional) -->
+                <div class="bg-white border-2 border-slate-200 rounded-xl p-3 shadow-sm shrink-0">
+                    <div class="flex items-center justify-between mb-3 border-b-2 border-slate-100 pb-2">
+                        <label class="text-sm font-black text-entegral-navy uppercase tracking-widest block font-arcade">5. Add-on Request</label>
+                        <span class="text-[10px] bg-slate-200 text-slate-500 font-bold px-2 py-0.5 rounded-md uppercase">Optional</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2" id="addonGrid">
+                        <!-- Removed 'None' button to make it truly optional -->
+                        <button data-val="GPS" class="addon-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors">GPS</button>
+                        <button data-val="Car Seat" class="addon-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">CAR<br>SEAT</button>
+                        <button data-val="Toll Pass" class="addon-option-btn bg-slate-50 border-2 border-slate-200 py-3 rounded-lg text-sm font-bold text-slate-700 cursor-pointer text-center transition-colors leading-tight">TOLL<br>PASS</button>
+                    </div>
+                </div>
+
+                <!-- 6. Policy Limits (Informational Audit Line) -->
+                <div class="bg-slate-100 border border-slate-300 rounded-lg p-3 text-center shrink-0 mt-2 mb-4 mx-2">
+                    <div id="policyAuditLine" class="text-sm font-bold text-slate-500 font-arcade uppercase tracking-wider flex items-center justify-center gap-2 transition-colors">
+                        <span>✅</span> WITHIN POLICY LIMITS
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- STICKY DISPATCH FOOTER -->
+            <footer class="absolute bottom-0 left-0 right-0 z-20 bg-white border-t-2 border-slate-200 p-4 shrink-0 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+                <button id="dispatchBtn" class="w-full bg-entegral-navy text-white font-extrabold text-xl py-4 rounded-xl border-b-[6px] border-[#012d52] hover:bg-slate-800 active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest flex items-center justify-center gap-3 cursor-pointer">
+                    🚘 DISPATCH RENTAL
+                </button>
+            </footer>
+
+            <!-- FLOATING INBOX BUTTON (Only visible when modal is closed) -->
+            <button id="viewActivePromptBtn" class="absolute bottom-[90px] right-4 bg-entegral-green text-entegral-navy border-2 border-white w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:scale-110 active:scale-95 transition-transform z-30 cursor-pointer">
+                <span class="text-2xl animate-pulse">🔔</span>
+            </button>
+
+        </div>
+
+        <!-- ACTIVE INBOX DIALOG / POP-UP (incoming order) -->
+        <div id="inboxModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="bg-white border-4 border-entegral-green rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-5 relative shadow-2xl transform scale-95 transition-transform duration-300" id="inboxCard">
+                <!-- Decorative Corner notches -->
+                <div class="absolute -top-1.5 -left-1.5 w-4 h-4 bg-entegral-green"></div>
+                <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-entegral-green"></div>
+
+                <div class="absolute -top-4 bg-entegral-green text-entegral-navy font-arcade font-bold px-4 py-1 rounded-full border-2 border-white shadow-md text-xs tracking-wider uppercase flex items-center gap-2">
+                    <span class="animate-pulse">🔔</span> NEW MESSAGE
+                </div>
+
+                <div class="mt-4 flex flex-col items-center">
+                    <div id="promptInitials" class="w-16 h-16 rounded-full bg-entegral-navy text-white flex items-center justify-center text-3xl font-black border-4 border-slate-100 shadow-md mb-2">H</div>
+                    <h2 id="promptName" class="text-2xl font-black text-slate-800 leading-tight">Holly</h2>
+                    <p id="promptCarType" class="text-xs text-slate-500 font-bold uppercase tracking-wide mt-1">Drives: Explorer (SUV)</p>
+                </div>
+
+                <div class="w-full bg-slate-50 border-2 border-slate-200 p-5 rounded-xl text-left shadow-inner relative">
+                    <p id="promptMainText" class="text-lg font-medium text-slate-700 leading-snug relative z-10 px-2 py-2 italic text-center">
+                        Hi! I'm Holly. My car was towed and isn't drivable. I need an SUV from home starting today, and I need a car seat!
+                    </p>
+                </div>
+
+                <button id="closeInboxBtn" class="w-full mt-2 bg-entegral-green text-entegral-navy font-black text-lg py-4 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest cursor-pointer">
+                    GOT IT! ➔
+                </button>
+            </div>
+        </div>
+
+        <!-- DISPATCH FEEDBACK MODAL (Mid-game scoring) -->
+        <div id="dispatchFeedbackModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-200">
+            <div id="dispatchFeedbackCard" class="bg-white border-4 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200">
+                <div id="feedbackStamp" class="text-4xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase">
+                    PERFECT!
+                </div>
+                
+                <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-3 text-center shadow-inner">
+                    <span class="text-[10px] font-bold text-slate-400 tracking-widest uppercase block">Ticket Score</span>
+                    <div id="feedbackScoreText" class="text-3xl font-black mt-1 font-arcade">
+                        10 / 10
+                    </div>
+                </div>
+
+                <div id="feedbackDetails" class="text-xs font-bold text-slate-500 uppercase tracking-wide h-12 flex flex-col justify-center gap-1">
+                    <!-- Dynamic deduction details injected here -->
+                </div>
+
+                <button id="nextCustomerBtn" class="w-full bg-entegral-navy text-white hover:bg-slate-800 font-black text-lg py-4 rounded-xl border-b-[6px] border-slate-900 active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest mt-2 cursor-pointer shadow-md">
+                    NEXT CUSTOMER ➔
+                </button>
+            </div>
+        </div>
+
+        <!-- GAME OVER / SHIFT ENDED MODAL -->
+        <div id="gameOverModal" class="absolute inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+            
+            <!-- STAGE 1: Visual Loading Overlay -->
+            <div id="loadingCard" class="flex flex-col items-center gap-4 transition-all duration-300">
+                <div class="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center text-5xl shadow-lg border-2 border-red-400">
+                    <span class="animate-alarm-buzz">⏰</span>
+                </div>
+                <h2 class="text-4xl font-black italic text-red-600 tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">SHIFT OVER!</h2>
+                <p class="text-xs text-slate-300 font-arcade font-bold uppercase tracking-[0.2em] mt-2 animate-pulse text-center">Calculating Performance...</p>
+            </div>
+
+            <!-- STAGE 2: Game Over Score Card (Initially Hidden) -->
+            <div class="bg-white border-4 border-red-500 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-5 relative shadow-2xl transform scale-95 transition-all duration-300 hidden" id="gameOverCard">
+                <!-- Decorative Corner notches -->
+                <div class="absolute -top-1.5 -left-1.5 w-4 h-4 bg-red-500"></div>
+                <div class="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-red-500"></div>
+
+                <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center text-3xl">
+                    <span class="animate-alarm-buzz">⏰</span>
+                </div>
+
+                <div>
+                    <h2 class="text-4xl font-black italic text-red-600 tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6">SHIFT OVER!</h2>
+                    <p class="text-xs text-slate-500 font-bold uppercase tracking-wider mt-2">Your 3 minutes are up!</p>
+                </div>
+
+                <div class="w-full bg-slate-50 border-2 border-slate-200 rounded-xl p-4 mt-2 text-center shadow-inner">
+                    <span class="text-xs font-bold text-slate-400 tracking-widest uppercase block">Final Score</span>
+                    <div class="text-4xl font-black text-entegral-navy mt-1 font-arcade" id="finalScoreText">
+                        0 / 0
+                    </div>
+                </div>
+
+                <!-- Simple play again button -->
+                <button id="restartBtn" class="w-full bg-entegral-green text-entegral-navy font-black text-lg py-4 mt-2 rounded-xl border-b-[6px] border-[#5a8703] active:border-b-0 active:translate-y-1 transition-all uppercase tracking-widest">
+                    PLAY AGAIN ➔
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const SCENARIOS = [
+            // SECTION 1: EASY SHIFTS (Levels 1-10) — Gold Policy ($1,500 Max)
+            {
+                name: "Holly",
+                carInfo: "Drives: SUV",
+                policyMax: 1500,
+                story: "My repair appointment is tomorrow morning. Please book me an Economy car at whatever branch is closest to the repair shop. I need it for 5 days, no add-ons.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Economy", addon: "None", length: 5 }
+            },
+            {
+                name: "John",
+                carInfo: "Drives: SUV",
+                policyMax: 1500,
+                story: "My car won't start today. There's an Enterprise right down the street from me. I need an SUV for 3 days, and please make sure it has GPS!",
+                expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "GPS", length: 3 }
+            },
+            {
+                name: "Elena",
+                carInfo: "Drives: Sedan",
+                policyMax: 1500,
+                story: "I just dropped my car off at the shop. I need a Sedan at whatever branch is closest to the mechanic asap. I'll need it for 7 days.",
+                expected: { date: "TODAY", location: "Repair Shop", clazz: "Sedan", addon: "None", length: 7 }
+            },
+            {
+                name: "Marcus",
+                carInfo: "Drives: Pickup",
+                policyMax: 1500,
+                story: "Dropping my truck off for repairs next Monday. I would prefer to pick up a rental Pickup closer to my workplace starting then. 4 days.",
+                expected: { date: "REPAIR_DATE", location: "Work", clazz: "Pickup", addon: "None", length: 4 }
+            },
+            {
+                name: "Sophia",
+                carInfo: "Drives: Minivan",
+                policyMax: 1500,
+                story: "Dropping my van off tomorrow. Please book a Minivan at whatever branch is closest to the repair shop starting then. Need it for 10 days, with a car seat.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Minivan", addon: "Car Seat", length: 10 }
+            },
+            {
+                name: "Tariq",
+                carInfo: "Drives: Sedan",
+                policyMax: 1500,
+                story: "I have an appointment to get my car repaired next Friday. It is fine to drive until then, so please book a Sedan at an Enterprise nearest the shop. I need it for 6 days and a Toll Pass.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Sedan", addon: "Toll Pass", length: 6 }
+            },
+            {
+                name: "Chloe",
+                carInfo: "Drives: Economy",
+                policyMax: 1500,
+                story: "Car was towed, I'm stranded at home! There's an Enterprise right down the street from me, I need an Economy car asap. 4 days, with GPS.",
+                expected: { date: "TODAY", location: "Home", clazz: "Economy", addon: "GPS", length: 4 }
+            },
+            {
+                name: "Brandon",
+                carInfo: "Drives: SUV",
+                policyMax: 1500,
+                story: "Wrecked my car today. Need an SUV at whatever branch is closest to me starting now. 5 days, with a car seat.",
+                expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "Car Seat", length: 5 }
+            },
+            {
+                name: "Devon",
+                carInfo: "Drives: Pickup",
+                policyMax: 1500,
+                story: "Dropped my truck at the shop today. Need a Pickup at whatever branch is closest to the shop starting today. 3 days, add a Toll Pass.",
+                expected: { date: "TODAY", location: "Repair Shop", clazz: "Pickup", addon: "Toll Pass", length: 3 }
+            },
+            {
+                name: "Emily",
+                carInfo: "Drives: Luxury",
+                policyMax: 1500,
+                story: "Repair starts tomorrow. I would prefer to pick up a Luxury car closer to my office after dropping it off. I need it for 5 days.",
+                expected: { date: "REPAIR_DATE", location: "Work", clazz: "Luxury", addon: "None", length: 5 }
+            },
+
+            // SECTION 2: MEDIUM SHIFTS (Levels 11-20)
+            {
+                name: "Elena",
+                carInfo: "Drives: Sedan",
+                policyMax: 1000,
+                story: "Repair is scheduled for next Monday. I'll need a Sedan for 15 days when I drop it off.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Sedan", addon: "None", length: 15 }
+            },
+            {
+                name: "Devon",
+                carInfo: "Drives: SUV",
+                policyMax: 1200,
+                story: "Stranded at home with no ride. Need an SUV for 18 days.",
+                expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "None", length: 18 }
+            },
+            {
+                name: "Sophia",
+                carInfo: "Drives: Minivan",
+                policyMax: 400,
+                story: "Dropping my van off tomorrow morning. Need a Minivan starting then. They said 5 days to fix. Will have my baby with me.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Minivan", addon: "Car Seat", length: 5 }
+            },
+            {
+                name: "Tariq",
+                carInfo: "Drives: Sedan",
+                policyMax: 1000,
+                story: "Repair scheduled next Tuesday, but fine to drive until then. I need a Sedan for 20 days. I'll get a ride to go pick it up after my shift so I can drive home.",
+                expected: { date: "REPAIR_DATE", location: "Work", clazz: "Sedan", addon: "None", length: 20 }
+            },
+            {
+                name: "Chloe",
+                carInfo: "Drives: Economy",
+                policyMax: 400,
+                story: "My car isn't drivable and I need to get to work. Need an Economy car for 12 days. Please add GPS!",
+                expected: { date: "TODAY", location: "Home", clazz: "Economy", addon: "GPS", length: 12 }
+            },
+            {
+                name: "Marcus",
+                carInfo: "Drives: Pickup",
+                policyMax: 1000,
+                story: "Dropping my truck off next Monday. Need a Pickup for 12 days. I want to swap keys right at the shop.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Pickup", addon: "None", length: 12 }
+            },
+            {
+                name: "Emily",
+                carInfo: "Drives: Sedan",
+                policyMax: 1000,
+                story: "Repairs scheduled next Wednesday and will take a couple weeks. I would like to pick up a Sedan before work. I use the express tollways.",
+                expected: { date: "REPAIR_DATE", location: "Work", clazz: "Sedan", addon: "Toll Pass", length: 14 }
+            },
+            {
+                name: "Brandon",
+                carInfo: "Drives: SUV",
+                policyMax: 1200,
+                story: "I was in a bad wreck, car just got towed. I got a ride home but I need a rental. SUV please, at least 15 days.",
+                expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "None", length: 15 }
+            },
+            {
+                name: "Sally",
+                carInfo: "Drives: Economy",
+                policyMax: 400,
+                story: "Dropping my car off tomorrow morning. Need an Economy car for 10 days that I can swap into. Please add GPS.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Economy", addon: "GPS", length: 10 }
+            },
+            {
+                name: "John",
+                carInfo: "Drives: Sedan",
+                policyMax: 1000,
+                story: "Dropping my car off tomorrow. Need to get a rental Sedan after that, for at least 16 days. My commute does use toll bridges.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Sedan", addon: "Toll Pass", length: 16 }
+            },
+
+            // SECTION 3: HARD SHIFTS (Levels 21-30)
+            {
+                name: "Mary",
+                carInfo: "Drives: SUV",
+                policyMax: 1000,
+                story: "SUV just got towed. I got a ride home but they said repairs will take 20 days. My car seat got towed with the car.",
+                expected: { date: "TODAY", location: "Home", clazz: "Sedan", addon: "Car Seat", length: 20 }
+            },
+            {
+                name: "Alex",
+                carInfo: "Drives: Luxury",
+                policyMax: 1200,
+                story: "Dropping my car off for repairs tomorrow. I'll need a Luxury car for 18 days. I'll take a cab to pick it up after work.",
+                expected: { date: "REPAIR_DATE", location: "Work", clazz: "SUV", addon: "None", length: 18 }
+            },
+            {
+                name: "Sarah",
+                carInfo: "Drives: Minivan",
+                policyMax: 900,
+                story: "My car is fine to drive until my repair next Tuesday. Will need a Minivan for 16 days. Want to swap keys at the repair center. Baby in tow.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "SUV", addon: "Car Seat", length: 16 }
+            },
+            {
+                name: "David",
+                carInfo: "Drives: Pickup",
+                policyMax: 800,
+                story: "Got into an accident and my truck isn't drivable. I need a Pickup for 15 days. There's an Enterprise a couple blocks away from my office.",
+                expected: { date: "TODAY", location: "Work", clazz: "Sedan", addon: "None", length: 15 }
+            },
+            {
+                name: "Lisa",
+                carInfo: "Drives: Sedan",
+                policyMax: 250,
+                story: "Got into a wreck and my car won't start. I'm home now but need a rental for 7 days. Please add GPS.",
+                expected: { date: "TODAY", location: "Home", clazz: "Economy", addon: "GPS", length: 7 }
+            },
+            {
+                name: "James",
+                carInfo: "Drives: SUV",
+                policyMax: 1000,
+                story: "Got in a bad wreck and my car got towed. They said 12 days to fix. I need to get to work tomorrow, need a rental asap. Need one with toll pass.",
+                expected: { date: "TODAY", location: "Home", clazz: "SUV", addon: "Toll Pass", length: 12 }
+            },
+            {
+                name: "Karen",
+                carInfo: "Drives: Minivan",
+                policyMax: 1000,
+                story: "Repair appointment is next week. Want to swap cars when I drop mine off. They said it would take 14 days to fix. Will have my toddler with me.",
+                expected: { date: "REPAIR_DATE", location: "Repair Shop", clazz: "Minivan", addon: "Car Seat", length: 14 }
+            },
+            {
+                name: "Robert",
+                carInfo: "Drives: Luxury",
+                policyMax: 1500,
+                story: "Car was just towed. Need a rental for the next 10 days. Would like to grab it on my way in to the office. Will need to use express lanes.",
+                expected: { date: "TODAY", location: "Home", clazz: "Luxury", addon: "Toll Pass", length: 10 }
+            },
+            {
+                name: "Linda",
+                carInfo: "Drives: Sedan",
+                policyMax: 400,
+                story: "Dropping my car off at the shop next Thursday. The shop is near my office. They said 9 days to fix.",
+                expected: { date: "REPAIR_DATE", location: "Work", clazz: "Sedan", addon: "None", length: 9 }
+            },
+            {
+                name: "William",
+                carInfo: "Drives: Pickup",
+                policyMax: 1000,
+                story: "Car is definitely a total loss, it just got towed. I'm stuck at home now. I need a rental for 11 days. Toddler is with me.",
+                expected: { date: "TODAY", location: "Home", clazz: "Pickup", addon: "Car Seat", length: 11 }
+            }
+        ];
+
+        // Start Game Listener Update
+        document.getElementById('startGameBtn').addEventListener('click', () => {
+            playSound('click');
+            const startScreen = document.getElementById('startScreen');
+            const gameBoard = document.getElementById('gameBoard');
+            const inboxModal = document.getElementById('inboxModal');
+
+            startScreen.style.opacity = '0';
+            startScreen.style.pointerEvents = 'none';
+
+            gameBoard.style.opacity = '1';
+            gameBoard.style.pointerEvents = 'auto';
+
+            startGame(); // Trigger the 3-minute timer
+
+            setTimeout(() => {
+                inboxModal.style.opacity = '1';
+                inboxModal.style.pointerEvents = 'auto';
+                document.getElementById('inboxCard').style.transform = 'scale(1)';
+            }, 300);
+        });
+
+        // Open Inbox
+        document.getElementById('viewActivePromptBtn').addEventListener('click', () => {
+            playSound('click');
+            const inboxModal = document.getElementById('inboxModal');
+            inboxModal.style.opacity = '1';
+            inboxModal.style.pointerEvents = 'auto';
+            document.getElementById('inboxCard').style.transform = 'scale(1)';
+        });
+
+        // Close Inbox
+        document.getElementById('closeInboxBtn').addEventListener('click', () => {
+            playSound('click');
+            const inboxModal = document.getElementById('inboxModal');
+            inboxModal.style.opacity = '0';
+            inboxModal.style.pointerEvents = 'none';
+            document.getElementById('inboxCard').style.transform = 'scale(0.95)';
+        });
+
+        // --- GAME STATE ---
+        let score = 0;
+        let ticketsAttempted = 0;
+        let timeLeft = 180; // 3 minutes for production
+        let gameTimer = null;
+        let activeScenario = null;
+        let selectedDate = null;
+        let selectedLocation = null;
+        let selectedVehicle = null;
+        let selectedAddon = null;
+
+        const VEHICLE_RATES = {
+            "Economy": 30,
+            "Sedan": 40,
+            "SUV": 55,
+            "Pickup": 60,
+            "Minivan": 60,
+            "Luxury": 80
+        };
+
+        // --- SCENARIO LOADING ENGINE ---
+        let availableEasy = [];
+        let availableMedium = [];
+        let availableHard = [];
+
+        function initScenarioPools() {
+            availableEasy = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            availableMedium = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+            availableHard = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+        }
+
+        function popRandom(arr) {
+            if (arr.length === 0) return null;
+            const randIdx = Math.floor(Math.random() * arr.length);
+            return arr.splice(randIdx, 1)[0];
+        }
+
+        function loadNextCustomer() {
+            let nextIndex = 0;
+            
+            if (timeLeft === 180 && !activeScenario) {
+                nextIndex = 0;
+            } else {
+                if (timeLeft > 120 && availableEasy.length > 0) {
+                    nextIndex = popRandom(availableEasy);
+                } else if (timeLeft > 60 && availableMedium.length > 0) {
+                    nextIndex = popRandom(availableMedium);
+                } else if (availableMedium.length === 0 && availableHard.length > 0 && timeLeft > 120) {
+                    nextIndex = popRandom(availableHard);
+                } else if (availableEasy.length === 0 && availableMedium.length > 0 && timeLeft > 120) {
+                    nextIndex = popRandom(availableMedium);
+                } else if (availableMedium.length === 0 && availableHard.length > 0 && timeLeft > 60) {
+                    nextIndex = popRandom(availableHard);
+                } else if (availableHard.length > 0) {
+                    nextIndex = popRandom(availableHard);
+                } else {
+                    clearInterval(gameTimer);
+                    endGame();
+                    return;
+                }
+            }
+
+            activeScenario = SCENARIOS[nextIndex];
+            resetFormBorders();
+            const mainContainer = document.querySelector('main');
+            if (mainContainer) mainContainer.scrollTop = 0;
+            
+            document.getElementById('promptInitials').innerText = activeScenario.name[0];
+            document.getElementById('promptName').innerText = activeScenario.name;
+            document.getElementById('promptCarType').innerText = activeScenario.carInfo;
+            document.getElementById('promptMainText').innerText = activeScenario.story;
+            
+            const inboxModal = document.getElementById('inboxModal');
+            inboxModal.style.opacity = '1';
+            inboxModal.style.pointerEvents = 'auto';
+            document.getElementById('inboxCard').style.transform = 'scale(1)';
+        }
+
+        function updateCoverageDaysText() {
+            const coverageText = document.getElementById('policyCoverageText');
+            if (!selectedVehicle || !activeScenario) {
+                coverageText.innerHTML = `Select a vehicle class to calculate covered days.`;
+                return;
+            }
+            const rate = VEHICLE_RATES[selectedVehicle];
+            const maxDays = Math.floor(activeScenario.policyMax / rate);
+            coverageText.innerHTML = `Based on policy, customer is covered for up to <span class="text-entegral-green font-black">${maxDays} days</span> of a ${selectedVehicle}.`;
+        }
+
+        function resetFormBorders() {
+            selectedDate = null;
+            selectedLocation = null;
+            selectedVehicle = null;
+            selectedAddon = null;
+            currentRentalLength = 7;
+            document.getElementById('rentalLengthDisplay').innerText = currentRentalLength;
+            
+            document.querySelectorAll('.date-option-btn, .location-option-btn, .vehicle-option-btn, .addon-option-btn').forEach(btn => {
+                btn.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+                btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+            });
+
+            ['date', 'location', 'vehicle'].forEach(type => {
+                const section = document.getElementById(type + 'Section');
+                if(section) {
+                    section.classList.remove('bg-red-50', 'border-red-400');
+                    section.classList.add('bg-white', 'border-slate-200');
+                }
+            });
+
+            updateCoverageDaysText();
+            document.getElementById('policyAuditLine').innerHTML = `<span>✅</span> WITHIN POLICY LIMITS`;
+            document.getElementById('policyAuditLine').parentElement.classList.remove('border-red-500', 'bg-red-50');
+        }
+
+        let currentRentalLength = 7;
+        const lengthDisplay = document.getElementById('rentalLengthDisplay');
+
+        document.getElementById('lengthMinusBtn').addEventListener('click', () => {
+            playSound('click');
+            if (currentRentalLength > 1) {
+                currentRentalLength--;
+                lengthDisplay.innerText = currentRentalLength;
+                checkPolicyAudit();
+            }
+        });
+
+        document.getElementById('lengthPlusBtn').addEventListener('click', () => {
+            playSound('click');
+            if (currentRentalLength < 30) {
+                currentRentalLength++;
+                lengthDisplay.innerText = currentRentalLength;
+                checkPolicyAudit();
+            }
+        });
+
+        function handleSelection(groupClass, type, event) {
+            playSound('click');
+            const btns = document.querySelectorAll(`.${groupClass}`);
+            
+            let currentVal = type === 'date' ? selectedDate : 
+                             type === 'location' ? selectedLocation : 
+                             type === 'vehicle' ? selectedVehicle : selectedAddon;
+
+            const targetVal = event.currentTarget.dataset.val;
+            
+            if (targetVal === currentVal) {
+                event.currentTarget.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+                event.currentTarget.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                if (type === 'date') selectedDate = null;
+                if (type === 'location') selectedLocation = null;
+                if (type === 'vehicle') selectedVehicle = null;
+                if (type === 'addon') selectedAddon = null;
+            } else {
+                btns.forEach(b => {
+                    b.classList.remove('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+                    b.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                });
+                event.currentTarget.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                event.currentTarget.classList.add('bg-entegral-green', 'text-entegral-navy', 'border-entegral-green');
+                if (type === 'date') selectedDate = targetVal;
+                if (type === 'location') selectedLocation = targetVal;
+                if (type === 'vehicle') selectedVehicle = targetVal;
+                if (type === 'addon') selectedAddon = targetVal;
+            }
+            
+            if (type === 'vehicle') {
+                updateCoverageDaysText();
+            }
+            checkPolicyAudit();
+        }
+
+        function checkPolicyAudit() {
+            const auditLine = document.getElementById('policyAuditLine');
+            if (!selectedVehicle || !activeScenario) {
+                auditLine.innerHTML = `<span>✅</span> WITHIN POLICY LIMITS`;
+                auditLine.parentElement.classList.remove('border-red-500', 'bg-red-50');
+                return;
+            }
+            const rate = VEHICLE_RATES[selectedVehicle];
+            const totalCost = rate * currentRentalLength;
+            
+            if (totalCost > activeScenario.policyMax) {
+                auditLine.innerHTML = `<span class="animate-pulse">❌</span> EXCEEDS LIMITS!`;
+                auditLine.parentElement.classList.add('border-red-500', 'bg-red-50');
+            } else {
+                auditLine.innerHTML = `<span>✅</span> WITHIN POLICY LIMITS`;
+                auditLine.parentElement.classList.remove('border-red-500', 'bg-red-50');
+            }
+        }
+
+        document.querySelectorAll('.date-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('date-option-btn', 'date', e)));
+        document.querySelectorAll('.location-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('location-option-btn', 'location', e)));
+        document.querySelectorAll('.vehicle-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('vehicle-option-btn', 'vehicle', e)));
+        document.querySelectorAll('.addon-option-btn').forEach(b => b.addEventListener('click', (e) => handleSelection('addon-option-btn', 'addon', e)));
+
+        document.getElementById('dispatchBtn').addEventListener('click', () => {
+            if (!activeScenario) return;
+            
+            let missingField = false;
+            let firstMissingNode = null;
+
+            ['date', 'location', 'vehicle'].forEach(type => {
+                const section = document.getElementById(type + 'Section');
+                section.classList.remove('bg-red-50', 'border-red-400');
+                section.classList.add('bg-white', 'border-slate-200');
+
+                let isSelected = false;
+                if (type === 'date' && selectedDate) isSelected = true;
+                if (type === 'location' && selectedLocation) isSelected = true;
+                if (type === 'vehicle' && selectedVehicle) isSelected = true;
+
+                if (!isSelected) {
+                    missingField = true;
+                    section.classList.remove('bg-white', 'border-slate-200');
+                    section.classList.add('bg-red-50', 'border-red-400');
+                    if (!firstMissingNode) firstMissingNode = section;
+                }
+            });
+
+            if (missingField) {
+                firstMissingNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            const formattedAddon = selectedAddon || "None";
+            let ticketScore = 10;
+            let deductionText = [];
+
+            const rate = VEHICLE_RATES[selectedVehicle];
+            const totalCost = rate * currentRentalLength;
+            if (totalCost > activeScenario.policyMax) {
+                showFeedbackModal(0, ["EXCEEDED POLICY MAX LIMIT!"]);
+                return;
+            }
+
+            if (selectedDate !== activeScenario.expected.date) {
+                ticketScore -= 2;
+                deductionText.push("-2: Incorrect Start Date");
+            }
+            if (selectedLocation !== activeScenario.expected.location) {
+                ticketScore -= 2;
+                deductionText.push("-2: Incorrect Location");
+            }
+            if (currentRentalLength < activeScenario.expected.length) {
+                ticketScore -= 2;
+                deductionText.push("-2: Rental Length Too Short");
+            }
+            if (formattedAddon !== activeScenario.expected.addon) {
+                ticketScore -= 2;
+                deductionText.push("-2: Incorrect Add-on");
+            }
+
+            if (selectedVehicle !== activeScenario.expected.clazz) {
+                const expectedRate = VEHICLE_RATES[activeScenario.expected.clazz];
+                const expectedCost = expectedRate * activeScenario.expected.length;
+                if (expectedCost <= activeScenario.policyMax && rate < expectedRate) {
+                    ticketScore -= 2;
+                    deductionText.push("-2: Unnecessary Vehicle Downgrade");
+                }
+            }
+
+            ticketScore = Math.max(0, ticketScore);
+            showFeedbackModal(ticketScore, deductionText);
+        });
+
+        function showFeedbackModal(ticketScore, detailsArray) {
+            ticketsAttempted++;
+            
+            const modal = document.getElementById('dispatchFeedbackModal');
+            const card = document.getElementById('dispatchFeedbackCard');
+            const stamp = document.getElementById('feedbackStamp');
+            const scoreText = document.getElementById('feedbackScoreText');
+            const detailsBox = document.getElementById('feedbackDetails');
+
+            score += ticketScore;
+            document.getElementById('scoreText').innerText = score;
+
+            scoreText.innerText = `${ticketScore} / 10`;
+            detailsBox.innerHTML = detailsArray.join("<br>");
+
+            if (ticketScore === 10) {
+                playSound('click');
+                stamp.innerText = "PERFECT!";
+                stamp.className = "text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-entegral-green";
+                card.className = "bg-white border-4 border-entegral-green rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200";
+            } else if (ticketScore === 0 && detailsArray[0] === "EXCEEDED POLICY MAX LIMIT!") {
+                playSound('fail');
+                stamp.innerText = "AUDITED!";
+                stamp.className = "text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-red-500 animate-pulse";
+                card.className = "bg-white border-4 border-red-500 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200";
+            } else {
+                playSound('click');
+                stamp.innerText = "OKAY";
+                stamp.className = "text-5xl font-black italic tracking-tighter text-center leading-none text-arcade-shadow transform -skew-x-6 mt-2 mb-2 font-arcade uppercase text-yellow-400";
+                card.className = "bg-white border-4 border-yellow-400 rounded-2xl p-6 w-full max-w-sm text-center flex flex-col items-center gap-4 relative shadow-2xl transform scale-95 transition-transform duration-200";
+            }
+
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'auto';
+            card.style.transform = 'scale(1)';
+        }
+
+        document.getElementById('nextCustomerBtn').addEventListener('click', () => {
+            playSound('click');
+            const modal = document.getElementById('dispatchFeedbackModal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+            document.getElementById('dispatchFeedbackCard').style.transform = 'scale(0.95)';
+            
+            if (timeLeft > 0) {
+                loadNextCustomer();
+            }
+        });
+
+        let audioCtx = null;
+        function playSound(type) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'fail') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.linearRampToValueAtTime(110, now + 0.3);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        function startGame() {
+            score = 0;
+            ticketsAttempted = 0;
+            timeLeft = 180;
+            activeScenario = null;
+            document.getElementById('scoreText').innerText = score;
+            
+            initScenarioPools();
+            loadNextCustomer();
+
+            if (gameTimer) clearInterval(gameTimer);
+            gameTimer = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            
+            const minutes = Math.floor(Math.max(0, timeLeft) / 60);
+            const seconds = Math.max(0, timeLeft) % 60;
+            document.getElementById('timerText').innerText =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeLeft <= 0) {
+                clearInterval(gameTimer);
+                setTimeout(endGame, 100);
+                return;
+            }
+
+            if (timeLeft < 30) {
+                document.getElementById('timerText').parentElement.classList.add('bg-red-900', 'border-red-500');
+            }
+        }
+
+        function endGame() {
+            playSound('fail');
+
+            const modal = document.getElementById('gameOverModal');
+            const card = document.getElementById('gameOverCard');
+            const loadingCard = document.getElementById('loadingCard');
+
+            const maxPoints = ticketsAttempted * 10;
+            document.getElementById('finalScoreText').innerText = `${score} / ${maxPoints}`;
+
+            modal.style.opacity = '1';
+            modal.style.pointerEvents = 'auto';
+            if(loadingCard) loadingCard.classList.remove('hidden');
+            if(card) {
+                card.classList.add('hidden');
+                card.style.transform = 'scale(0.95)';
+            }
+
+            const revealFinalResults = () => {
+                if(loadingCard) loadingCard.classList.add('hidden');
+                if(card) {
+                    card.classList.remove('hidden');
+                    setTimeout(() => {
+                        card.style.transform = 'scale(1)';
+                    }, 50);
+                }
+            };
+
+            setTimeout(() => {
+                revealFinalResults();
+            }, 1200);
+        }
+
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            playSound('click');
+            
+            const inboxModal = document.getElementById('inboxModal');
+            inboxModal.style.opacity = '0';
+            inboxModal.style.pointerEvents = 'none';
+            document.getElementById('inboxCard').style.transform = 'scale(0.95)';
+            
+            const gameOverModal = document.getElementById('gameOverModal');
+            gameOverModal.style.opacity = '0';
+            gameOverModal.style.pointerEvents = 'none';
+            document.getElementById('gameOverCard').style.transform = 'scale(0.95)';
+            
+            const startScreen = document.getElementById('startScreen');
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.style.opacity = '0';
+            gameBoard.style.pointerEvents = 'none';
+            startScreen.style.opacity = '1';
+            startScreen.style.pointerEvents = 'auto';
+            
+            document.getElementById('timerText').innerText = "03:00";
+            document.getElementById('timerText').parentElement.classList.remove('bg-red-900', 'border-red-500');
+            
+            resetFormBorders();
+        });
+
+    </script>
+</body>
+</html>
